@@ -1,0 +1,1385 @@
+---
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <title>Realtime Colors</title>
+    <meta
+      name="description"
+      content="Visualize your color palettes on a real website for the first time."
+    />
+    <meta
+      name="keywords"
+      content="colorpicker, color palettes, color theory, UI design, UX design, brand styleguide"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-control" content="max-age=31536000" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:title" content="Realtime Colors" />
+    <meta
+      property="og:description"
+      content="Visualize your color palettes on a real website."
+    />
+    <meta
+      property="og:image"
+      content="https://github.com/juxtopposed/realtimecolors/blob/main/images/preview.png?raw=true"
+    />
+    <meta property="og:url" content="https://realtimecolors.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Realtime Colors" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="418" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- <link rel="stylesheet" href="/styles/global.css" /> -->
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://realtimecolors.com/images/favicon.png"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">
+        <img
+          src="https://realtimecolors.com/images/favicon.png"
+          alt="logoface"
+          class="logoface"
+        />
+        <a href="/">
+          <h2 class="sitename">Realtime Colors</h2>
+        </a>
+      </div>
+      <div class="ham-menu">
+        <button id="hamburger">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="menu hide">
+        <a
+          href="https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors"
+          target="_blank"
+          class="menu-item menu-item-mobile"
+        >
+          Try Figma Plugin
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+          >
+            <rect
+              x="0.318182"
+              y="0.318182"
+              width="13.3636"
+              height="13.3636"
+              rx="2.10647"
+              stroke="var(--text)"
+              stroke-width="0.636364"
+            />
+            <path
+              d="M4.33594 9.7564L9.75615 4.33618M9.75615 4.33618L5.41998 4.33618M9.75615 4.33618V8.94337"
+              stroke="var(--text)"
+              stroke-width="0.813033"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+        <a href="/palettes" class="menu-item menu-item-mobile"
+          >Palette Generator</a
+        >
+        <a href="/docs" class="menu-item menu-item-mobile">
+          Docs
+          <span
+            style="
+              background-color: var(--text);
+              padding: 0.4em 0.4em 0.4em 0.2em;
+              border-radius: 5px;
+              font-size: 12px;
+              color: var(--bg);
+            "
+            >New!</span
+          >
+        </a>
+        <a href="#sub" class="primary-button menu-item-font">Subscribe</a>
+      </div>
+    </nav>
+    <div id="app"></div>
+    <div class="hero">
+      <div class="hero-text">
+        <h1>
+          Visualize Your <span class="color-effect">Colors</span> <br />On a
+          Real Website
+        </h1>
+        <p class="subtitle">
+          Choosing a color palette for your website?<br />Use the Toolbar below
+          to realize your choices.
+        </p>
+        <div class="hero-cta">
+          <a href="#toolbar" onclick="highlightToolbar()" class="primary-button"
+            >Get Started</a
+          >
+          <a href="#how" class="secondary-button">How does it work?</a>
+        </div>
+        <div class="hero-scroll">
+          <svg width="23" height="33" viewBox="0 0 23 33" fill="none">
+            <rect
+              x="0.767442"
+              y="0.767442"
+              width="20.7209"
+              height="31.4651"
+              rx="10.3605"
+              stroke="var(--text)"
+              stroke-width="1.53488"
+            />
+            <rect x="9" y="8" width="4" height="8" rx="2" fill="var(--text)" />
+          </svg>
+          <p class="sub">Scroll to see more sections</p>
+        </div>
+      </div>
+      <div class="hero-img">
+        <a href="#mondrian-info" id="mondrian-info-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M9.06818 14.2259V7.6804H10.8835V14.2259H9.06818ZM9.98011 6.83665C9.71023 6.83665 9.47869 6.74716 9.28551 6.56818C9.09517 6.38636 9 6.16903 9 5.91619C9 5.66619 9.09517 5.4517 9.28551 5.27273C9.47869 5.09091 9.71023 5 9.98011 5C10.25 5 10.4801 5.09091 10.6705 5.27273C10.8636 5.4517 10.9602 5.66619 10.9602 5.91619C10.9602 6.16903 10.8636 6.38636 10.6705 6.56818C10.4801 6.74716 10.25 6.83665 9.98011 6.83665Z"
+              fill="var(--text)"
+            />
+            <circle
+              cx="10"
+              cy="10"
+              r="9.44118"
+              stroke="var(--text)"
+              stroke-width="1.11765"
+            />
+          </svg>
+        </a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="652"
+          height="644"
+          viewBox="0 0 652 644"
+          fill="none"
+          class="mondrian"
+        >
+          <rect
+            opacity="0.05"
+            x="1"
+            width="163"
+            height="60"
+            rx="10"
+            fill="var(--text)"
+          />
+          <rect
+            x="424"
+            width="193"
+            height="60"
+            rx="10"
+            fill="var(--secondary)"
+          />
+          <rect
+            x="424"
+            y="68"
+            width="193"
+            height="175"
+            rx="10"
+            fill="var(--secondary)"
+          />
+          <rect
+            opacity="0.2"
+            x="424"
+            y="401"
+            width="193"
+            height="79"
+            rx="10"
+            fill="var(--primary)"
+          />
+          <rect
+            x="255"
+            y="626"
+            width="362"
+            height="18"
+            rx="9"
+            fill="var(--bg)"
+          />
+          <rect
+            x="80"
+            y="579"
+            width="166"
+            height="65"
+            rx="10"
+            fill="var(--bg)"
+          />
+          <rect
+            x="255"
+            y="579"
+            width="160"
+            height="40"
+            rx="10"
+            fill="var(--text)"
+          />
+          <rect
+            opacity="0.05"
+            x="255"
+            y="490"
+            width="160"
+            height="80"
+            rx="10"
+            fill="var(--text)"
+          />
+          <rect
+            opacity="0.05"
+            x="255"
+            y="400"
+            width="160"
+            height="80"
+            rx="10"
+            fill="var(--text)"
+          />
+          <rect
+            x="80"
+            y="68"
+            width="335"
+            height="324"
+            rx="10"
+            fill="var(--primary)"
+          />
+          <rect
+            x="80"
+            y="401"
+            width="166"
+            height="169"
+            rx="10"
+            fill="var(--text)"
+          />
+          <rect
+            x="424"
+            y="490"
+            width="193"
+            height="129"
+            rx="10"
+            fill="var(--accent)"
+          />
+          <rect
+            x="626"
+            y="490"
+            width="26"
+            height="154"
+            rx="10"
+            fill="var(--primary)"
+          />
+          <rect
+            x="424"
+            y="252"
+            width="91"
+            height="140"
+            rx="10"
+            fill="var(--bg)"
+          />
+          <rect
+            x="524"
+            y="252"
+            width="93"
+            height="140"
+            rx="10"
+            fill="var(--bg)"
+          />
+          <rect
+            opacity="0.05"
+            x="626"
+            width="26"
+            height="480"
+            rx="10"
+            fill="var(--text)"
+          />
+          <rect x="173" width="242" height="60" rx="10" fill="var(--bg)" />
+          <rect x="1" y="68" width="70" height="157" rx="10" fill="var(--bg)" />
+          <rect
+            opacity="0.05"
+            x="1"
+            y="234"
+            width="70"
+            height="259"
+            rx="10"
+            fill="var(--text)"
+          />
+          <rect
+            x="1"
+            y="502"
+            width="70"
+            height="142"
+            rx="10"
+            fill="var(--secondary)"
+          />
+        </svg>
+      </div>
+    </div>
+    <main>
+      <div class="part1" id="why">
+        <h2>Why Realtime Colors?</h2>
+        <div class="part1-cards">
+          <div class="part1-card">
+            <svg
+              width="117"
+              height="117"
+              viewBox="0 0 117 117"
+              fill="none"
+              style="z-index: 5"
+              class="part1-card-img"
+            >
+              <circle cx="58.5" cy="58.5" r="58.5" fill="var(--bg)" />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M89.4669 8.85912L58.0465 63.9419L2.44746 41.7023C9.66585 17.5806 32.0298 0 58.5 0C69.872 0 80.4861 3.24483 89.4669 8.85912Z"
+                fill="var(--accent)"
+                fill-opacity="0.6"
+              />
+              <path
+                d="M81.5 22.5L57.1395 64.8489L32 53.5"
+                stroke="var(--text)"
+                stroke-width="7.25581"
+              />
+            </svg>
+            <p class="subtitle highlight">Saves time</p>
+            <p>
+              No need to spend hours implementing different variations of
+              colors. Decide right away!
+            </p>
+            <div class="part1-card-bg"></div>
+          </div>
+          <div class="part1-card">
+            <svg
+              width="112"
+              height="114"
+              viewBox="0 0 112 114"
+              fill="none"
+              style="z-index: 5"
+              class="part1-card-img"
+            >
+              <rect width="58" height="58" fill="var(--bg)" />
+              <rect
+                x="69"
+                y="25"
+                width="33"
+                height="33"
+                fill="var(--accent)"
+                fill-opacity="0.6"
+              />
+              <rect
+                x="69"
+                y="71"
+                width="43"
+                height="43"
+                fill="var(--text)"
+                fill-opacity="0.2"
+              />
+              <rect x="20" y="70" width="38" height="39" fill="var(--text)" />
+            </svg>
+            <p class="subtitle highlight">It's Realistic</p>
+            <p>
+              Color Palettes make it hard to pick. This tool distributes the
+              colors on a real website.
+            </p>
+            <div class="part1-card-bg"></div>
+          </div>
+          <div class="part1-card">
+            <svg
+              width="179"
+              height="89"
+              viewBox="0 0 179 89"
+              fill="none"
+              style="z-index: 5"
+              class="part1-card-img"
+            >
+              <rect
+                y="26"
+                width="154"
+                height="63"
+                fill="var(--accent)"
+                fill-opacity="0.6"
+              />
+              <path d="M142 15.5V0" stroke="var(--text)" stroke-width="8" />
+              <path
+                d="M163 34L178.5 34"
+                stroke="var(--text)"
+                stroke-width="8"
+              />
+              <path
+                d="M158 19.5L170.5 7"
+                stroke="var(--text)"
+                stroke-width="8"
+              />
+              <path
+                d="M63 54L74.5 65L95.5 44"
+                stroke="var(--text)"
+                stroke-width="8"
+              />
+            </svg>
+            <p class="subtitle highlight">It's simple</p>
+            <p>
+              Push a few buttons, and there you have it! Your very own branding
+              colors, ready to export.
+            </p>
+            <div class="part1-card-bg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="part6" id="bento">
+        <ul class="bento-wrapper">
+          <li class="first-row-col1 primary-color-box">
+            100K+ Users<br />
+            <span style="font-size: var(--subtitle); font-weight: normal"
+              >and counting...</span
+            >
+          </li>
+          <li class="first-row-col2 secondary-color-box">
+            100% Free!<br />
+            <span style="font-size: var(--p); font-weight: normal"
+              >Sponsored by YOU.</span
+            >
+          </li>
+          <li class="second-row-col1 text-color-box">
+            <svg
+              width="335"
+              height="472"
+              viewBox="0 0 335 472"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="figma-icon"
+            >
+              <path
+                d="M15 236C15 264.427 29.205 289.546 50.8988 304.667C29.205 319.787 15 344.906 15 373.333C15 419.536 52.5239 457 98.7363 457C144.949 457 182.473 419.536 182.473 373.333V304.667V300.156C197.019 312.334 215.764 319.667 236.209 319.667C282.421 319.667 319.945 282.203 319.945 236C319.945 207.573 305.74 182.454 284.046 167.333C305.74 152.213 319.945 127.094 319.945 98.6667C319.945 52.4641 282.421 15 236.209 15H167.473H98.7363C52.5239 15 15 52.4641 15 98.6667C15 127.094 29.205 152.213 50.8988 167.333C29.205 182.454 15 207.573 15 236Z"
+                fill="var(--bg)"
+                stroke="var(--bg)"
+                stroke-width="30"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M98.7363 442C136.679 442 167.473 411.237 167.473 373.333V304.667H98.7363C60.7938 304.667 30 335.429 30 373.333C30 411.237 60.7938 442 98.7363 442Z"
+                fill="#0ACF83"
+              />
+              <path
+                d="M30 236C30 198.096 60.7938 167.333 98.7363 167.333H167.473V304.667H98.7363C60.7938 304.667 30 273.904 30 236Z"
+                fill="#A259FF"
+              />
+              <path
+                d="M30 98.6667C30 60.7627 60.7938 30 98.7363 30H167.473V167.333H98.7363C60.7938 167.333 30 136.571 30 98.6667Z"
+                fill="#F24E1E"
+              />
+              <path
+                d="M167.473 30H236.209C274.151 30 304.945 60.7627 304.945 98.6667C304.945 136.571 274.151 167.333 236.209 167.333H167.473V30Z"
+                fill="#FF7262"
+              />
+              <path
+                d="M304.945 236C304.945 273.904 274.151 304.667 236.209 304.667C198.266 304.667 167.473 273.904 167.473 236C167.473 198.096 198.266 167.333 236.209 167.333C274.151 167.333 304.945 198.096 304.945 236Z"
+                fill="#1ABCFE"
+              />
+            </svg>
+            <span style="font-weight: bold">5K+ Plugin Users</span>
+            <a
+              href="https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors"
+              target="_blank"
+              class="link reversed bento-link"
+              >Check it out on Figma</a
+            >
+          </li>
+
+          <li class="second-row-col2 accent-color-box">
+            100+ ProductHunt Upvotes<a
+              href="https://www.producthunt.com/products/real-time-colors"
+              target="_blank"
+              class="link bento-link"
+              >Leave a review</a
+            >
+          </li>
+          <!-- </li> -->
+        </ul>
+      </div>
+      <div class="part2" id="how">
+        <div class="part2-left">
+          <h2>How Does it Work?</h2>
+          <p>You'll get your finalized color palette in 4 simple steps.</p>
+        </div>
+        <div class="part2-right">
+          <p class="one step">
+            Start with two neutral colors for the text and the background.
+          </p>
+          <p class="two step">
+            Choose your primary and secondary colors. Primary is for main CTAs
+            and sections, and Secondary is for less important buttons and info
+            cards.
+          </p>
+          <p class="three step">
+            Accent color is an additional color. It appears in images,
+            highlights, hyperlinks, boxes, cards, etc.
+          </p>
+          <p class="four step">
+            Happy with the results? Press on “Export” and choose among different
+            options to export in various formats, like .zip, .png, CSS, SCSS, QR
+            Code, and more.
+          </p>
+        </div>
+      </div>
+      <div class="part3" id="sub">
+        <div class="part3-heading">
+          <h2>Plans &Pricing</h2>
+          <p>The tool is 100% free! This is just a generic section.</p>
+        </div>
+        <div class="part3-cards">
+          <div class="part3-card">
+            <div class="part3-card-text">
+              <div class="promo" style="visibility: hidden">
+                <p class="sub promo-text">None</p>
+              </div>
+              <h2>Basic</h2>
+              <p>Free</p>
+              <div class="part3-list">
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">Choose any color</p>
+                </div>
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">Export all you want</p>
+                </div>
+              </div>
+            </div>
+            {/*<a
+              href="#toolbar"
+              onclick="highlightToolbar()"
+              class="secondary-button"
+              >Get Started</a
+            >*/}
+            <div class="part3-bg"></div>
+          </div>
+          <div class="part3-card">
+            <div class="part3-card-text">
+              <div class="promo">
+                <svg width="27" height="28" viewBox="0 0 27 28" fill="none">
+                  <path
+                    d="M13.5412 0.494507L14.6922 8.99311L19.4165 1.83551L16.7661 9.99186L24.1282 5.59291L18.2013 11.7915L26.7429 11.0225L18.7135 14.0357L26.7429 17.0489L18.2013 16.2799L24.1282 22.4785L16.7661 18.0796L19.4165 26.2359L14.6922 19.0783L13.5412 27.5769L12.3903 19.0783L7.6659 26.2359L10.3163 18.0796L2.95427 22.4785L8.88114 16.2799L0.339506 17.0489L8.36893 14.0357L0.339506 11.0225L8.88114 11.7915L2.95427 5.59291L10.3163 9.99186L7.6659 1.83551L12.3903 8.99311L13.5412 0.494507Z"
+                    fill="var(--primary)"
+                  />
+                </svg>
+                <p class="sub promo-text">Most Popular</p>
+              </div>
+              <h2>Pro</h2>
+              <p>$0.00 / month</p>
+              <div class="part3-list">
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">Choose any color</p>
+                </div>
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">Export all you want</p>
+                </div>
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">
+                    Get a big thank you for checking this site out
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/*<a
+              href="#toolbar"
+              onclick="highlightToolbar()"
+              class="primary-button"
+              >Get Started</a
+            >*/}
+            <div class="part3-bg best"></div>
+          </div>
+          <div class="part3-card">
+            <div class="part3-card-text">
+              <div class="promo" style="visibility: hidden">
+                <p class="sub promo-text">None</p>
+              </div>
+              <h2>Enterprise</h2>
+              <p>$0.00 / month</p>
+              <div class="part3-list">
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">Choose any color</p>
+                </div>
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">Export all you want</p>
+                </div>
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">
+                    Get a big thank you for checking this site out
+                  </p>
+                </div>
+                <div class="list">
+                  <svg
+                    width="29"
+                    height="22"
+                    viewBox="0 0 29 22"
+                    fill="none"
+                    class="check-icon"
+                  >
+                    <path
+                      d="M3 9.72308L11.1385 17.8615L26 3"
+                      stroke="var(--accent)"
+                      stroke-width="5.66154"
+                    />
+                  </svg>
+                  <p class="list-item">Super duper exclusive chat via email</p>
+                </div>
+              </div>
+            </div>
+            <a href="mailto:juxtopposed.me@gmail.com" class="secondary-button"
+              >Contact</a
+            >
+            <div class="part3-bg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="part4" id="faq">
+        <div class="part4-heading">
+          <h2>FAQ</h2>
+          <p>Answers to some questions you might have.</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq">
+            <div class="faq-q">
+              <h3>How many colors should I choose?</h3>
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 23 23"
+                fill="none"
+                class="faq-icon"
+              >
+                <path
+                  d="M11.5 0L11.5 23"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+                <path
+                  d="M23 11.5L-2.38419e-07 11.5"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+              </svg>
+            </div>
+            <div class="faq-a">
+              <p>
+                Normally, 3 colors are absolutely fine (meaning background,
+                text, and one accent color).<br />However, if you want, you can
+                have more. Usually, we don't add more than 6 colors across a
+                platform. It would just make things too... complicated. Plus, it
+                makes it hard to keep the colors consistent throughout the
+                design.
+              </p>
+            </div>
+          </div>
+          <div class="faq" id="contrast-info">
+            <div class="faq-q">
+              <h3>How does the contrast checker work?</h3>
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 23 23"
+                fill="none"
+                class="faq-icon contrast-icon"
+              >
+                <path
+                  d="M11.5 0L11.5 23"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+                <path
+                  d="M23 11.5L-2.38419e-07 11.5"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+              </svg>
+            </div>
+            <div class="faq-a contrast-answer">
+              <p>
+                The contrast checker shows the contrast ratio between the
+                selected color and its background/foreground.<br />
+                <br />The contrast checker has 3 lights:
+              </p>
+              <ul style="line-height: 2; font-size: var(--p)">
+                <li>
+                  <b>Red:</b>
+                  The contrast ratio does not pass either AAA or AA. Therefore,
+                  both large and normal texts are hardly readable.
+                </li>
+                <li>
+                  <b>Yellow:</b>
+                  The contrast ratio might pass AA but won't pass AAA. Large
+                  texts might be readable but normal texts are probably not
+                  readable.
+                </li>
+                <li>
+                  <b>Green:</b>
+                  The contrast ratio passes both AA and AAA. Both large and
+                  normal texts are readable.
+                </li>
+              </ul>
+              <p>
+                Learn more about the
+                <a href="/docs/contrast-checker" target="_blank" class="link"
+                  >contrast checker</a
+                >
+                .
+              </p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-q">
+              <h3>What will I receive after downloading the exported file?</h3>
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 23 23"
+                fill="none"
+                class="faq-icon"
+              >
+                <path
+                  d="M11.5 0L11.5 23"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+                <path
+                  d="M23 11.5L-2.38419e-07 11.5"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+              </svg>
+            </div>
+            <div class="faq-a">
+              <p>
+                After downloading through export options, you will receive a
+                .zip file. This file is compressed, so you will have to extract
+                it.<br />After extracting it, you will see a .png file and a
+                .txt file. The .png image shows your color palette in squares
+                next to each other. The .txt file includes the color codes in
+                HEX and RGB. You can send these files to designers or
+                developers, or just use them in your project.
+              </p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-q">
+              <h3>Why do some colors have some transparency?</h3>
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 23 23"
+                fill="none"
+                class="faq-icon"
+              >
+                <path
+                  d="M11.5 0L11.5 23"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+                <path
+                  d="M23 11.5L-2.38419e-07 11.5"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+              </svg>
+            </div>
+            <div class="faq-a">
+              <p>
+                This website allows you to choose only opaque colors. However,
+                to make the design more appealing, I've made some parts more
+                transparent by adding a bit of opacity to them. Of course, you
+                can use these colors however you want in your own projects.
+              </p>
+            </div>
+          </div>
+          <div class="faq mondrian-faq" id="mondrian-info">
+            <div class="faq-q">
+              <h3>What does the hero image represent?</h3>
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 23 23"
+                fill="none"
+                class="faq-icon mondrian-icon"
+              >
+                <path
+                  d="M11.5 0L11.5 23"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+                <path
+                  d="M23 11.5L-2.38419e-07 11.5"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+              </svg>
+            </div>
+            <div class="faq-a mondrian-answer">
+              <p>
+                The hero image is inspired by Piet Mondrian's
+                <b
+                  >Composition with Large Red Plane, Yellow, Black, Grey and
+                  Blue</b
+                >
+                . This composition keeps the ratio of the main colors (red,
+                blue, and yellow) very close to the 60-30-10 rule of UI design.
+                This is mainly why I've chosen this composition to visualize the
+                distribution of the colors on the page.
+              </p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-q">
+              <h3>How can I set up the fonts?</h3>
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 23 23"
+                fill="none"
+                class="faq-icon"
+              >
+                <path
+                  d="M11.5 0L11.5 23"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+                <path
+                  d="M23 11.5L-2.38419e-07 11.5"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+              </svg>
+            </div>
+            <div class="faq-a">
+              <p>
+                You can either upload a font file from your device locally in
+                the formats .otf, .ttf, .woff, or .woff2, or you can enter the
+                name of a font from Google Fonts or the fonts installed on your
+                device. Read more about
+                <a href="/docs/font-setup" target="_blank" class="link"
+                  >Font Setup</a
+                >
+                .
+              </p>
+            </div>
+          </div>
+          <div class="faq">
+            <div class="faq-q">
+              <h3>How can I learn more about this tool?</h3>
+              <svg
+                width="23"
+                height="23"
+                viewBox="0 0 23 23"
+                fill="none"
+                class="faq-icon"
+              >
+                <path
+                  d="M11.5 0L11.5 23"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+                <path
+                  d="M23 11.5L-2.38419e-07 11.5"
+                  stroke="var(--accent)"
+                  stroke-width="6"
+                />
+              </svg>
+            </div>
+            <div class="faq-a">
+              <p>
+                You can find more information about Realtime Colors on the
+                <a href="/docs" target="_blank" class="link">Docs</a> . You can
+                also
+                <a
+                  href="mailto:juxtopposed.me@gmail.com"
+                  target="_blank"
+                  class="link"
+                  >email me</a
+                >
+                any questions you might have.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="part1" id="testimonials">
+        <div class="part3-heading">
+          <h2>Testimonials</h2>
+          <p>What (imaginary) people are saying about this site.</p>
+        </div>
+        <div class="part1-cards">
+          <div class="part1-card">
+            <div class="reviewer">
+              <div class="reviewer-img r-one"></div>
+              <div class="reviewer-name">
+                Cool User<br />
+                <span style="opacity: 0.5">Product Designer</span>
+              </div>
+            </div>
+            <svg
+              width="159"
+              height="26"
+              viewBox="0 0 159 26"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="rating"
+            >
+              <path
+                d="M145.336 21.7742L151.933 25.7642C153.141 26.4955 154.62 25.4145 154.302 24.0474L152.553 16.5443L158.387 11.4892C159.452 10.5672 158.88 8.81858 157.481 8.7073L149.803 8.05555L146.798 0.965712C146.258 -0.321904 144.414 -0.321904 143.873 0.965712L140.869 8.03965L133.191 8.69141C131.792 8.80268 131.22 10.5513 132.285 11.4733L138.119 16.5284L136.37 24.0315C136.052 25.3986 137.531 26.4796 138.739 25.7483L145.336 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M13.6026 21.7742L20.1996 25.7642C21.4077 26.4955 22.8861 25.4145 22.5682 24.0474L20.8196 16.5443L26.6536 11.4892C27.7186 10.5672 27.1464 8.81858 25.7475 8.7073L18.0695 8.05555L15.065 0.965712C14.5246 -0.321904 12.6806 -0.321904 12.1401 0.965712L9.13564 8.03965L1.45764 8.69141C0.0587495 8.80268 -0.513524 10.5513 0.55154 11.4733L6.38555 16.5284L4.63694 24.0315C4.31901 25.3986 5.79738 26.4796 7.00551 25.7483L13.6026 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M46.5357 21.7742L53.1327 25.7642C54.3408 26.4955 55.8192 25.4145 55.5013 24.0474L53.7527 16.5443L59.5867 11.4892C60.6517 10.5672 60.0795 8.81858 58.6806 8.7073L51.0026 8.05555L47.9981 0.965712C47.4577 -0.321904 45.6137 -0.321904 45.0732 0.965712L42.0687 8.03965L34.3907 8.69141C32.9919 8.80268 32.4196 10.5513 33.4846 11.4733L39.3187 16.5284L37.57 24.0315C37.2521 25.3986 38.7305 26.4796 39.9386 25.7483L46.5357 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M79.4693 21.7742L86.0663 25.7642C87.2744 26.4955 88.7528 25.4145 88.4349 24.0474L86.6863 16.5443L92.5203 11.4892C93.5853 10.5672 93.0131 8.81858 91.6142 8.7073L83.9362 8.05555L80.9317 0.965712C80.3913 -0.321904 78.5473 -0.321904 78.0068 0.965712L75.0023 8.03965L67.3243 8.69141C65.9254 8.80268 65.3532 10.5513 66.4182 11.4733L72.2523 16.5284L70.5036 24.0315C70.1857 25.3986 71.6641 26.4796 72.8722 25.7483L79.4693 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M112.402 21.7742L118.999 25.7642C120.208 26.4955 121.686 25.4145 121.368 24.0474L119.619 16.5443L125.453 11.4892C126.518 10.5672 125.946 8.81858 124.547 8.7073L116.869 8.05555L113.865 0.965712C113.324 -0.321904 111.48 -0.321904 110.94 0.965712L107.935 8.03965L100.257 8.69141C98.8586 8.80268 98.2863 10.5513 99.3513 11.4733L105.185 16.5284L103.437 24.0315C103.119 25.3986 104.597 26.4796 105.805 25.7483L112.402 21.7742Z"
+                fill="var(--accent)"
+              />
+            </svg>
+            <p class="review">
+              "Wow! I love this site. Realtime Colors is all websites at the
+              same time."
+            </p>
+            <div class="part1-card-bg"></div>
+          </div>
+          <div class="part1-card">
+            <div class="reviewer">
+              <div class="reviewer-img r-two"></div>
+              <div class="reviewer-name">
+                Creative Person<br />
+                <span style="opacity: 0.5">Product Owner</span>
+              </div>
+            </div>
+            <svg
+              width="159"
+              height="26"
+              viewBox="0 0 159 26"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="rating"
+            >
+              <path
+                d="M145.336 21.7742L151.933 25.7642C153.141 26.4955 154.62 25.4145 154.302 24.0474L152.553 16.5443L158.387 11.4892C159.452 10.5672 158.88 8.81858 157.481 8.7073L149.803 8.05555L146.798 0.965712C146.258 -0.321904 144.414 -0.321904 143.873 0.965712L140.869 8.03965L133.191 8.69141C131.792 8.80268 131.22 10.5513 132.285 11.4733L138.119 16.5284L136.37 24.0315C136.052 25.3986 137.531 26.4796 138.739 25.7483L145.336 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M13.6026 21.7742L20.1996 25.7642C21.4077 26.4955 22.8861 25.4145 22.5682 24.0474L20.8196 16.5443L26.6536 11.4892C27.7186 10.5672 27.1464 8.81858 25.7475 8.7073L18.0695 8.05555L15.065 0.965712C14.5246 -0.321904 12.6806 -0.321904 12.1401 0.965712L9.13564 8.03965L1.45764 8.69141C0.0587495 8.80268 -0.513524 10.5513 0.55154 11.4733L6.38555 16.5284L4.63694 24.0315C4.31901 25.3986 5.79738 26.4796 7.00551 25.7483L13.6026 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M46.5357 21.7742L53.1327 25.7642C54.3408 26.4955 55.8192 25.4145 55.5013 24.0474L53.7527 16.5443L59.5867 11.4892C60.6517 10.5672 60.0795 8.81858 58.6806 8.7073L51.0026 8.05555L47.9981 0.965712C47.4577 -0.321904 45.6137 -0.321904 45.0732 0.965712L42.0687 8.03965L34.3907 8.69141C32.9919 8.80268 32.4196 10.5513 33.4846 11.4733L39.3187 16.5284L37.57 24.0315C37.2521 25.3986 38.7305 26.4796 39.9386 25.7483L46.5357 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M79.4693 21.7742L86.0663 25.7642C87.2744 26.4955 88.7528 25.4145 88.4349 24.0474L86.6863 16.5443L92.5203 11.4892C93.5853 10.5672 93.0131 8.81858 91.6142 8.7073L83.9362 8.05555L80.9317 0.965712C80.3913 -0.321904 78.5473 -0.321904 78.0068 0.965712L75.0023 8.03965L67.3243 8.69141C65.9254 8.80268 65.3532 10.5513 66.4182 11.4733L72.2523 16.5284L70.5036 24.0315C70.1857 25.3986 71.6641 26.4796 72.8722 25.7483L79.4693 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M112.402 21.7742L118.999 25.7642C120.208 26.4955 121.686 25.4145 121.368 24.0474L119.619 16.5443L125.453 11.4892C126.518 10.5672 125.946 8.81858 124.547 8.7073L116.869 8.05555L113.865 0.965712C113.324 -0.321904 111.48 -0.321904 110.94 0.965712L107.935 8.03965L100.257 8.69141C98.8586 8.80268 98.2863 10.5513 99.3513 11.4733L105.185 16.5284L103.437 24.0315C103.119 25.3986 104.597 26.4796 105.805 25.7483L112.402 21.7742Z"
+                fill="var(--accent)"
+              />
+            </svg>
+            <p class="review">
+              "Amazing. I found my favorite colors in literally... 2 minutes?
+              Woah! Totally real review."
+            </p>
+            <div class="part1-card-bg"></div>
+          </div>
+          <div class="part1-card">
+            <div class="reviewer">
+              <div class="reviewer-img r-three"></div>
+              <div class="reviewer-name">
+                Real Reviewer<br />
+                <span style="opacity: 0.5">Developer</span>
+              </div>
+            </div>
+            <svg
+              width="159"
+              height="26"
+              viewBox="0 0 159 26"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="rating"
+            >
+              <path
+                d="M145.336 21.7742L151.933 25.7642C153.141 26.4955 154.62 25.4145 154.302 24.0474L152.553 16.5443L158.387 11.4892C159.452 10.5672 158.88 8.81858 157.481 8.7073L149.803 8.05555L146.798 0.965712C146.258 -0.321904 144.414 -0.321904 143.873 0.965712L140.869 8.03965L133.191 8.69141C131.792 8.80268 131.22 10.5513 132.285 11.4733L138.119 16.5284L136.37 24.0315C136.052 25.3986 137.531 26.4796 138.739 25.7483L145.336 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M13.6026 21.7742L20.1996 25.7642C21.4077 26.4955 22.8861 25.4145 22.5682 24.0474L20.8196 16.5443L26.6536 11.4892C27.7186 10.5672 27.1464 8.81858 25.7475 8.7073L18.0695 8.05555L15.065 0.965712C14.5246 -0.321904 12.6806 -0.321904 12.1401 0.965712L9.13564 8.03965L1.45764 8.69141C0.0587495 8.80268 -0.513524 10.5513 0.55154 11.4733L6.38555 16.5284L4.63694 24.0315C4.31901 25.3986 5.79738 26.4796 7.00551 25.7483L13.6026 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M46.5357 21.7742L53.1327 25.7642C54.3408 26.4955 55.8192 25.4145 55.5013 24.0474L53.7527 16.5443L59.5867 11.4892C60.6517 10.5672 60.0795 8.81858 58.6806 8.7073L51.0026 8.05555L47.9981 0.965712C47.4577 -0.321904 45.6137 -0.321904 45.0732 0.965712L42.0687 8.03965L34.3907 8.69141C32.9919 8.80268 32.4196 10.5513 33.4846 11.4733L39.3187 16.5284L37.57 24.0315C37.2521 25.3986 38.7305 26.4796 39.9386 25.7483L46.5357 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M79.4693 21.7742L86.0663 25.7642C87.2744 26.4955 88.7528 25.4145 88.4349 24.0474L86.6863 16.5443L92.5203 11.4892C93.5853 10.5672 93.0131 8.81858 91.6142 8.7073L83.9362 8.05555L80.9317 0.965712C80.3913 -0.321904 78.5473 -0.321904 78.0068 0.965712L75.0023 8.03965L67.3243 8.69141C65.9254 8.80268 65.3532 10.5513 66.4182 11.4733L72.2523 16.5284L70.5036 24.0315C70.1857 25.3986 71.6641 26.4796 72.8722 25.7483L79.4693 21.7742Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M112.402 21.7742L118.999 25.7642C120.208 26.4955 121.686 25.4145 121.368 24.0474L119.619 16.5443L125.453 11.4892C126.518 10.5672 125.946 8.81858 124.547 8.7073L116.869 8.05555L113.865 0.965712C113.324 -0.321904 111.48 -0.321904 110.94 0.965712L107.935 8.03965L100.257 8.69141C98.8586 8.80268 98.2863 10.5513 99.3513 11.4733L105.185 16.5284L103.437 24.0315C103.119 25.3986 104.597 26.4796 105.805 25.7483L112.402 21.7742Z"
+                fill="var(--accent)"
+              />
+            </svg>
+            <p class="review">
+              "Astonished. This product is so cool. You should try it and
+              upgrade to Enterprise plan. No kidding."
+            </p>
+            <div class="part1-card-bg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="part1" id="featured-posts">
+        <div class="part3-heading">
+          <h2>Featured Articles</h2>
+          <p>Just some interesting guides and posts.</p>
+        </div>
+        <div class="part1-cards featured-col">
+          <div class="doc-item main-page">
+            <a
+              href="/docs/examples"
+              class="doc-link"
+              style="font-size: var(--p); padding: 2em 1em"
+              >Examples of Colors from Popular Sites</a
+            >
+            <div class="col1-doc-link-bg"></div>
+          </div>
+          <div class="doc-item main-page">
+            <a
+              href="/docs/selecting-colors"
+              class="doc-link"
+              style="font-size: var(--p); padding: 2em 1em"
+              >How to Select Colors</a
+            >
+            <div class="col1-doc-link-bg"></div>
+          </div>
+          <div class="doc-item main-page">
+            <a
+              href="/docs/issues"
+              class="doc-link"
+              style="font-size: var(--p); padding: 2em 1em"
+              >Learn More about the Releases</a
+            >
+            <div class="col1-doc-link-bg"></div>
+          </div>
+        </div>
+      </div>
+      <div class="part5" id="end">
+        <h1>
+          Your <span class="color-effect">Journey</span>
+          Shouldn't End Here.
+        </h1>
+        <p class="subtitle">
+          Follow me on social media to stay tuned on more projects.
+        </p>
+        <a
+          href="https://twitter.com/juxtopposed"
+          target="_blank"
+          class="primary-button"
+          >Stay Tuned</a
+        >
+      </div>
+      <div class="footer" id="footer">
+        <div class="logo">
+          <img src="/images/favicon.png" alt="logoface" class="logoface" />
+          <a href="/">
+            <h2 class="sitename reversed">Realtime Colors</h2>
+          </a>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <p style="margin: 0">Visualize your color choices.</p>
+            <a
+              href="https://www.producthunt.com/posts/real-time-colors?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-real&#0045;time&#0045;colors"
+              target="_blank"
+            >
+              <img
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=390080&theme=dark"
+                alt="Real&#0045;time&#0032;Colors - Real&#0045;time&#0032;UI&#0032;Color&#0032;Palette&#0032;Tool | Product Hunt"
+                style="width: 250px; height: 54px"
+                width="250"
+                height="54"
+              />
+            </a>
+            <script
+              type="text/javascript"
+              src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"
+            ></script>
+            <script type="text/javascript">
+              kofiwidget2.init('Support Me on Ko-fi', '#221D21', 'Z8Z2L1JGX')
+              kofiwidget2.draw()
+            </script>
+          </div>
+          <div class="footer-col">
+            <div class="reversed sub menu-item-header">EXPLORE</div>
+            <a
+              href="https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors"
+              target="_blank"
+              class="menu-item"
+            >
+              Try Figma Plugin
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+              >
+                <rect
+                  x="0.318182"
+                  y="0.318182"
+                  width="13.3636"
+                  height="13.3636"
+                  rx="2.10647"
+                  stroke="var(--bg)"
+                  stroke-width="0.636364"
+                />
+                <path
+                  d="M4.33594 9.7564L9.75615 4.33618M9.75615 4.33618L5.41998 4.33618M9.75615 4.33618V8.94337"
+                  stroke="var(--bg)"
+                  stroke-width="0.813033"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <a href="/palettes" class="menu-item">Palette Generator</a>
+            <a href="/docs" class="menu-item reversed">
+              Docs
+              <span
+                style="
+                  background-color: var(--bg);
+                  padding: 0.4em 0.4em 0.4em 0.2em;
+                  border-radius: 5px;
+                  font-size: 12px;
+                  color: var(--text);
+                "
+                >New!</span
+              >
+            </a>
+          </div>
+          <div class="footer-col">
+            <div class="reversed sub menu-item-header">LET'S CONNECT</div>
+            <a
+              href="https://twitter.com/juxtopposed"
+              class="menu-item reversed"
+              target="_blank"
+              >Twitter</a
+            >
+            <a
+              href="https://codepen.io/Juxtopposed"
+              target="_blank"
+              class="menu-item reversed"
+              >CodePen</a
+            >
+            <a
+              href="https://www.youtube.com/@juxtopposed"
+              target="_blank"
+              class="menu-item reversed"
+              >YouTube</a
+            >
+            <a
+              href="https://dribbble.com/juxtopposed"
+              target="_blank"
+              class="menu-item reversed"
+              >Dribbble</a
+            >
+            <a
+              href="https://github.com/juxtopposed"
+              target="_blank"
+              class="menu-item reversed"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div
+          style="
+            width: 100%;
+            height: 1px;
+            background-color: var(--bg);
+            opacity: 20%;
+            margin-top: 1em;
+          "
+        ></div>
+        <div>
+          <p class="sub">
+            Feedback? Suggestions? Features you'd like to see?
+            <a
+              href="mailto:juxtopposed.me@gmail.com"
+              target="_blank"
+              class="link reversed"
+              >Contact me!</a
+            >
+          </p>
+          <p class="sub">
+            Made with &lt;3 by
+            <a
+              href="https://twitter.com/juxtopposed"
+              target="_blank"
+              class="link reversed"
+            >
+              @Juxtopposed</a
+            >
+          </p>
+          <p class="sub">Copyright © 2023 All Rights Reserved</p>
+        </div>
+      </div>
+      <tool-bar class="toolbar" id="toolbar"></tool-bar>
+      <export-options></export-options>
+      <div id="tip-bar">
+        <button id="close-btn">&times;</button>
+        <p>
+          <b>Tip:</b>
+          Press the Spacebar to randomize faster!
+        </p>
+      </div>
+    </main>
+    <script src="../utils/toolbar.js"></script>
+    <script src="../utils/script.js"></script>  
+    <script src="../utils/random-sets.js"></script>
+    <script src="../utils/misc.js"></scrip>
+    <script src="../utils/font-loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../utils/qrcode.js"></script>
+    <script>
+      ;(function () {
+        if (typeof _bsa !== 'undefined' && _bsa) {
+          _bsa.init('flexbar', 'CWYDKK7Y', 'placement:realtimecolorscom')
+        }
+      })()
+    </script>
+  </body>
+</html>
