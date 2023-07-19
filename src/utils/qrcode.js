@@ -590,7 +590,7 @@ var QRCode;
             }
             c._bSupportDataURI === !0 && c._fSuccess ? c._fSuccess.call(c) : c._bSupportDataURI === !1 && c._fFail && c._fFail.call(c)
         }
-        if (this._android && this._android <= 2.1) {
+        if (this?._android && this._android <= 2.1) {
             var b = 1 / window.devicePixelRatio
               , c = CanvasRenderingContext2D.prototype.drawImage;
             CanvasRenderingContext2D.prototype.drawImage = function(a, d, e, f, g, h, i, j) {
