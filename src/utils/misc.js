@@ -84,7 +84,7 @@ function hideTipBar() {
 
 closeBtn.addEventListener('click', hideTipBar);
 
-randomizeBtn.addEventListener('click', function(event) {
+randomizeBtn?.addEventListener('click', function(event) {
   if (!localStorage.getItem('tipShown')) {
     setTimeout(showTipBar, 2000);
     localStorage.setItem('tipShown', true);
@@ -162,7 +162,7 @@ function copyPageUrl() {
 
 var activeTabIndex = 0;
 
-document.getElementById("export").addEventListener("click", function() {
+document.getElementById("export")?.addEventListener("click", function() {
     document.getElementById("overlay").style.display = "block";
     document.getElementById("popup").style.display = "flex";
     document.querySelector("export-options").style.display = "block";
@@ -172,7 +172,7 @@ document.getElementById("export").addEventListener("click", function() {
     moveLine(activeTab, activeTabIndex);
 });
   
-document.getElementById("overlay").addEventListener("click", function() {
+document.getElementById("overlay")?.addEventListener("click", function() {
     document.getElementById("overlay").style.display = "none";
     document.getElementById("popup").style.display = "none";
     document.querySelector("export-options").style.display = "none";
@@ -180,7 +180,7 @@ document.getElementById("overlay").addEventListener("click", function() {
 
 const fontRollout = document.querySelector(".fonts-rollout");
 
-fontRollout.addEventListener("click", () => {
+fontRollout?.addEventListener("click", () => {
   document.getElementById("overlay").style.display = "none";
   document.getElementById("popup").style.display = "none";
   document.querySelector("export-options").style.display = "none";
@@ -190,8 +190,8 @@ var tabs = document.querySelectorAll(".tab");
 var tabContents = document.querySelectorAll(".tabContent");
 var line = document.querySelector(".line");
   
-tabs.forEach(function(tab, index) {
-    tab.addEventListener("click", function() {
+tabs?.forEach(function(tab, index) {
+    tab?.addEventListener("click", function() {
       var tabId = this.getAttribute("data-tab");
       activateTab(tabId);
       moveLine(tab, index);

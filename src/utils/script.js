@@ -1341,10 +1341,10 @@ function appendHexValue(element, color) {
 
 function fillDivsWithShades() {
   const primaryColorValue = primaryColor?.value
-  const secondaryColorValue = secondaryColor.value
-  const primbuttnColorValue = primbuttnColor.value
-  const secbuttnColorValue = secbuttnColor.value
-  const accentColorValue = accentColor.value
+  const secondaryColorValue = secondaryColor?.value
+  const primbuttnColorValue = primbuttnColor?.value
+  const secbuttnColorValue = secbuttnColor?.value
+  const accentColorValue = accentColor?.value
 
   const textShadesDiv = document.querySelector('.text-shades')
   const bgShadesDiv = document.querySelector('.bg-shades')
@@ -1355,10 +1355,10 @@ function fillDivsWithShades() {
   const numShades = 20
   const maxLightness = 95
 
-  function hexToHSL(hex) {
-    const r = parseInt(hex.substring(1, 3), 16) / 255
-    const g = parseInt(hex.substring(3, 5), 16) / 255
-    const b = parseInt(hex.substring(5, 7), 16) / 255
+  function hexToHSL(hex={substring(){}}) {
+    const r = parseInt(hex?.substring(1, 3), 16) / 255
+    const g = parseInt(hex?.substring(3, 5), 16) / 255
+    const b = parseInt(hex?.substring(5, 7), 16) / 255
 
     const max = Math.max(r, g, b)
     const min = Math.min(r, g, b)
@@ -1398,11 +1398,11 @@ function fillDivsWithShades() {
     return `hsl(${color.h}, ${color.s}%, ${lightness}%)`
   }
 
-  textShadesDiv.innerHTML = ''
-  bgShadesDiv.innerHTML = ''
-  primaryShadesDiv.innerHTML = ''
-  secondaryShadesDiv.innerHTML = ''
-  accentShadesDiv.innerHTML = ''
+  textShadesDiv?.innerHTML = ''
+  bgShadesDiv?.innerHTML = ''
+  primaryShadesDiv?.innerHTML = ''
+  secondaryShadesDiv?.innerHTML = ''
+  accentShadesDiv?.innerHTML = ''
 
   const textHSL = hexToHSL(primaryColorValue)
   const bgHSL = hexToHSL(secondaryColorValue)
