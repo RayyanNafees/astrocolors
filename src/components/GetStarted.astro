@@ -1,0 +1,16 @@
+---
+export interface Props {
+  secondary?: boolean
+}
+const { secondary = false } = Astro.props
+---
+
+<a href='#toolbar' class={`${secondary ? 'secondary' : 'primary'}-button`}>
+  Get Started
+</a>
+
+<script>
+  import { highlightToolbar } from '../utils/misc'
+  const toolbar = document.querySelector<HTMLElement>('a[href="#toolbar"]')
+  toolbar?.addEventListener('click', highlightToolbar)
+</script>

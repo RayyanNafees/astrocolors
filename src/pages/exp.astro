@@ -19,6 +19,7 @@ import Featured from '../components/Featured/index.astro'
 import Pricing from '../components/Pricing/index.astro'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
+import GetStarted from '../components/GetStarted.astro'
 ---
 
 <RealtimeLayout>
@@ -35,13 +36,7 @@ import Footer from '../components/Footer.astro'
         realize your choices.
       </p>
       <div class='hero-cta'>
-        <a
-          href='#toolbar'
-          onclick='
-          highlightToolbar()
-          '
-          class='primary-button'>Get Started</a
-        >
+        <GetStarted />
         <a href='#how' class='secondary-button'>How does it work?</a>
       </div>
       <div class='hero-scroll'>

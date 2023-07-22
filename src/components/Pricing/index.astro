@@ -1,6 +1,7 @@
 ---
 import Item from './Item.astro'
 import Star from '../SVG/Star.astro'
+import GetStarted from '../GetStarted.astro'
 
 const free = ['Choose any color', 'Export all you want']
 const pro = [
@@ -33,7 +34,7 @@ const enterprise = [
           {free.map((i) => <Item>{i}</Item>)}
         </div>
       </div>
-      <a href='#toolbar' class='secondary-button'>Get Started</a>
+      <GetStarted secondary={true} />
       <div class='part3-bg'></div>
     </div>
     <div class='part3-card'>
@@ -48,7 +49,7 @@ const enterprise = [
           {pro.map((i) => <Item>{i}</Item>)}
         </div>
       </div>
-
+      <GetStarted />
       <div class='part3-bg best'></div>
     </div>
     <div class='part3-card'>
@@ -69,8 +70,4 @@ const enterprise = [
     </div>
   </div>
 </div>
-<script>
-  import {highlightToolbar} from '../../utils/misc'
-  const toolbar = document.querySelector<HTMLElement>('a[href="#toolbar"]')
-  toolbar?.addEventListener('click', highlightToolbar);
-</script>
+
