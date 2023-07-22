@@ -1,3 +1,5 @@
+import QRcode from 'qrcode'
+
 const primaryButtons = document.querySelectorAll('.primary-button')
 const secondaryButtons = document.querySelectorAll('.secondary-button')
 const partTwo = document.querySelectorAll('.part2')
@@ -501,11 +503,22 @@ function generateQRCode() {
     qrcodeElement.removeChild(qrcodeElement.firstChild)
   }
 
-  var qrcode = new QRCode(qrcodeElement, {
+  return new QRCode(qrcodeElement, {
     text: currentUrl,
     width: 250,
     height: 250,
   })
+}
+function generateQRCode2() {
+  var currentUrl = window.location.href
+
+  return QRcode.toDataURL(currentUrl, {width:250})
+    .then((url) => {
+      alert(url.length)
+      var img = document.querySelector('div#qrcode>image')
+      img.src = url
+    })
+    .catch(console.err)
 }
 
 hexInputs.forEach((hexInput) => {
@@ -1585,6 +1598,10 @@ accentColor.addEventListener('input', checkContrast)
 const downloadButton = document.getElementById('download')
 const fileNameInput = document.getElementById('file-name-input')
 const errorMessage = document.getElementById('error-message')
+
+/**
+ * Generates the zip file to be downloaded
+ */
 downloadButton.addEventListener('click', () => {
   const fileNameInput = document.getElementById('file-name-input')
   const fileName = fileNameInput.value.trim()
@@ -2038,11 +2055,11 @@ function applyColorsFromSlug() {
   generateCSVCodeAndCopy()
   fillDivsWithShades()
   checkDarkOrLight()
-  generateQRCode()
+  // generateQRCode()
+  generateQRCode2()
 }
 
 applyColorsFromSlug()
-
 ;[
   primaryColor,
   secondaryColor,

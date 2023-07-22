@@ -10,7 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.8.5"
+    "astro": "^2.8.5",
+    "jszip": "^3.10.1",
+    "nanostores": "^0.9.3",
+    "qrcode": "^1.5.3"
   },
   "devDependencies": {
     "unocss": "^0.53.5"
