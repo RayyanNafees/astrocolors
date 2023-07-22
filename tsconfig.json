@@ -1,7 +1,9 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "exclude": ["node_modules"],
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   },
   "noImplicitAny": false
 }
