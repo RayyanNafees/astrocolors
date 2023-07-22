@@ -45,7 +45,7 @@ faqQuestions.forEach((faqQuestion, index) => {
 
 
 
-function highlightToolbar() {
+export function highlightToolbar() {
   var toolbar = document.getElementById("toolbar")!;
   toolbar.classList.add("highlighted");
   setTimeout(function() {

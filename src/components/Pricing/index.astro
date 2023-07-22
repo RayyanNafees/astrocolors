@@ -1,0 +1,76 @@
+---
+import Item from './Item.astro'
+import Star from '../SVG/Star.astro'
+
+const free = ['Choose any color', 'Export all you want']
+const pro = [
+  'Choose any color',
+  'Export all you want',
+  'Get a big thank you for checking this site out',
+]
+const enterprise = [
+  'Choose any color',
+  'Export all you want',
+  'Get a big thank you for checking this site out',
+  'Super duper exclusive chat via email',
+]
+---
+
+<div class='part3' id='sub'>
+  <div class='part3-heading'>
+    <h2>Plans &Pricing</h2>
+    <p>The tool is 100% free! This is just a generic section.</p>
+  </div>
+  <div class='part3-cards'>
+    <div class='part3-card'>
+      <div class='part3-card-text'>
+        <div class='promo' style='visibility: hidden'>
+          <p class='sub promo-text'>None</p>
+        </div>
+        <h2>Basic</h2>
+        <p>Free</p>
+        <div class='part3-list'>
+          {free.map((i) => <Item>{i}</Item>)}
+        </div>
+      </div>
+      <a href='#toolbar' class='secondary-button'>Get Started</a>
+      <div class='part3-bg'></div>
+    </div>
+    <div class='part3-card'>
+      <div class='part3-card-text'>
+        <div class='promo'>
+          <Star />
+          <p class='sub promo-text'>Most Popular</p>
+        </div>
+        <h2>Pro</h2>
+        <p>$0.00 / month</p>
+        <div class='part3-list'>
+          {pro.map((i) => <Item>{i}</Item>)}
+        </div>
+      </div>
+
+      <div class='part3-bg best'></div>
+    </div>
+    <div class='part3-card'>
+      <div class='part3-card-text'>
+        <div class='promo' style='visibility: hidden'>
+          <p class='sub promo-text'>None</p>
+        </div>
+        <h2>Enterprise</h2>
+        <p>$0.00 / month</p>
+        <div class='part3-list'>
+          {enterprise.map((i) => <Item>{i}</Item>)}
+        </div>
+      </div>
+      <a href='mailto:juxtopposed.me@gmail.com' class='secondary-button'>
+        Contact
+      </a>
+      <div class='part3-bg'></div>
+    </div>
+  </div>
+</div>
+<script>
+  import {highlightToolbar} from '../../utils/misc'
+  const toolbar = document.querySelector<HTMLElement>('a[href="#toolbar"]')
+  toolbar?.addEventListener('click', highlightToolbar);
+</script>

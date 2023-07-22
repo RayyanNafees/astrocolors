@@ -1,0 +1,25 @@
+---
+import Rating from '../SVG/Rating.astro'
+
+export interface Props {
+  user: string
+  job: string
+}
+
+const { user, job } = Astro.props
+---
+
+<div class='part1-card'>
+  <div class='reviewer'>
+    <div class='reviewer-img r-one'></div>
+    <div class='reviewer-name'>
+      {user}<br />
+      <span style='opacity: 0.5'>{job}</span>
+    </div>
+  </div>
+  <Rating />
+  <p class='review'>
+    <slot />
+  </p>
+  <div class='part1-card-bg'></div>
+</div>

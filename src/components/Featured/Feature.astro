@@ -1,0 +1,18 @@
+---
+export interface Props{
+  href: string
+}
+
+const {href} = Astro.props
+---
+
+<div class='doc-item main-page'>
+  <a
+    href={href}
+    class='doc-link'
+    style='font-size: var(--p); padding: 2em 1em'
+  >
+  <slot />
+  </a>
+  <div class='col1-doc-link-bg'></div>
+</div>

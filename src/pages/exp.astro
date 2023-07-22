@@ -10,12 +10,12 @@ import Clock from '../components/SVG/Clock.astro'
 import Realistic from '../components/SVG/Realistic.astro'
 import Simple from '../components/SVG/Simple.astro'
 import Figma from '../components/SVG/Figma.astro'
-import Check from '../components/SVG/Check.astro'
-import Star from '../components/SVG/Star.astro'
-import Rating from '../components/SVG/Rating.astro'
 
 // Components
 import FAQs from '../components/FAQ/index.astro'
+import Testimonies from '../components/Testimonials/index.astro'
+import Featured from '../components/Featured/index.astro'
+import Pricing from '../components/Pricing/index.astro'
 
 ---
 
@@ -124,7 +124,9 @@ import FAQs from '../components/FAQ/index.astro'
           to realize your choices.
         </p>
         <div class="hero-cta">
-          <a href="#toolbar" onclick="highlightToolbar()" class="primary-button"
+          <a href="#toolbar" onclick="
+          highlightToolbar()
+          " class="primary-button"
             >Get Started</a
           >
           <a href="#how" class="secondary-button">How does it work?</a>
@@ -235,190 +237,10 @@ import FAQs from '../components/FAQ/index.astro'
           </p>
         </div>
       </div>
-      <div class="part3" id="sub">
-        <div class="part3-heading">
-          <h2>Plans &Pricing</h2>
-          <p>The tool is 100% free! This is just a generic section.</p>
-        </div>
-        <div class="part3-cards">
-          <div class="part3-card">
-            <div class="part3-card-text">
-              <div class="promo" style="visibility: hidden">
-                <p class="sub promo-text">None</p>
-              </div>
-              <h2>Basic</h2>
-              <p>Free</p>
-              <div class="part3-list">
-                <div class="list">
-                  <Check />
-                  <p class="list-item">Choose any color</p>
-                </div>
-                <div class="list">
-                  <Check  />
-                  <p class="list-item">Export all you want</p>
-                </div>
-              </div>
-            </div>
-            {/*<a
-              href="#toolbar"
-              onclick="highlightToolbar()"
-              class="secondary-button"
-              >Get Started</a
-            >*/}
-            <div class="part3-bg"></div>
-          </div>
-          <div class="part3-card">
-            <div class="part3-card-text">
-              <div class="promo">
-                <Star />
-                <p class="sub promo-text">Most Popular</p>
-              </div>
-              <h2>Pro</h2>
-              <p>$0.00 / month</p>
-              <div class="part3-list">
-                <div class="list">
-                  <Check />
-                  <p class="list-item">Choose any color</p>
-                </div>
-                <div class="list">
-                  <Check />
-                  <p class="list-item">Export all you want</p>
-                </div>
-                <div class="list">
-                  <Check />
-                  <p class="list-item">
-                    Get a big thank you for checking this site out
-                  </p>
-                </div>
-              </div>
-            </div>
-          
-            <div class="part3-bg best"></div>
-          </div>
-          <div class="part3-card">
-            <div class="part3-card-text">
-              <div class="promo" style="visibility: hidden">
-                <p class="sub promo-text">None</p>
-              </div>
-              <h2>Enterprise</h2>
-              <p>$0.00 / month</p>
-              <div class="part3-list">
-                <div class="list">
-                  <Check />
-                  <p class="list-item">Choose any color</p>
-                </div>
-                <div class="list">
-                  <Check />
-                  <p class="list-item">Export all you want</p>
-                </div>
-                <div class="list">
-                  <Check />
-                  <p class="list-item">
-                    Get a big thank you for checking this site out
-                  </p>
-                </div>
-                <div class="list">
-                  <Check />
-                  <p class="list-item">Super duper exclusive chat via email</p>
-                </div>
-              </div>
-            </div>
-            <a href="mailto:juxtopposed.me@gmail.com" class="secondary-button"
-              >Contact</a
-            >
-            <div class="part3-bg"></div>
-          </div>
-        </div>
-      </div>
+     <Pricing />
       <FAQs />
-      <div class="part1" id="testimonials">
-        <div class="part3-heading">
-          <h2>Testimonials</h2>
-          <p>What (imaginary) people are saying about this site.</p>
-        </div>
-        <div class="part1-cards">
-          <div class="part1-card">
-            <div class="reviewer">
-              <div class="reviewer-img r-one"></div>
-              <div class="reviewer-name">
-                Cool User<br />
-                <span style="opacity: 0.5">Product Designer</span>
-              </div>
-            </div>
-            <Rating />
-            <p class="review">
-              "Wow! I love this site. Realtime Colors is all websites at the
-              same time."
-            </p>
-            <div class="part1-card-bg"></div>
-          </div>
-          <div class="part1-card">
-            <div class="reviewer">
-              <div class="reviewer-img r-two"></div>
-              <div class="reviewer-name">
-                Creative Person<br />
-                <span style="opacity: 0.5">Product Owner</span>
-              </div>
-            </div>
-           <Rating />
-            <p class="review">
-              "Amazing. I found my favorite colors in literally... 2 minutes?
-              Woah! Totally real review."
-            </p>
-            <div class="part1-card-bg"></div>
-          </div>
-          <div class="part1-card">
-            <div class="reviewer">
-              <div class="reviewer-img r-three"></div>
-              <div class="reviewer-name">
-                Real Reviewer<br />
-                <span style="opacity: 0.5">Developer</span>
-              </div>
-            </div>
-            <Rating />
-            <p class="review">
-              "Astonished. This product is so cool. You should try it and
-              upgrade to Enterprise plan. No kidding."
-            </p>
-            <div class="part1-card-bg"></div>
-          </div>
-        </div>
-      </div>
-      <div class="part1" id="featured-posts">
-        <div class="part3-heading">
-          <h2>Featured Articles</h2>
-          <p>Just some interesting guides and posts.</p>
-        </div>
-        <div class="part1-cards featured-col">
-          <div class="doc-item main-page">
-            <a
-              href="/docs/examples"
-              class="doc-link"
-              style="font-size: var(--p); padding: 2em 1em"
-              >Examples of Colors from Popular Sites</a
-            >
-            <div class="col1-doc-link-bg"></div>
-          </div>
-          <div class="doc-item main-page">
-            <a
-              href="/docs/selecting-colors"
-              class="doc-link"
-              style="font-size: var(--p); padding: 2em 1em"
-              >How to Select Colors</a
-            >
-            <div class="col1-doc-link-bg"></div>
-          </div>
-          <div class="doc-item main-page">
-            <a
-              href="/docs/issues"
-              class="doc-link"
-              style="font-size: var(--p); padding: 2em 1em"
-              >Learn More about the Releases</a
-            >
-            <div class="col1-doc-link-bg"></div>
-          </div>
-        </div>
-      </div>
+      <Testimonies />
+      <Featured />
       <div class="part5" id="end">
         <h1>
           Your <span class="color-effect">Journey</span>
@@ -431,8 +253,9 @@ import FAQs from '../components/FAQ/index.astro'
           href="https://twitter.com/juxtopposed"
           target="_blank"
           class="primary-button"
-          >Stay Tuned</a
-        >
+          >
+          Stay Tuned 
+        </a>
       </div>
       <div class="footer" id="footer">
         <div class="logo">
