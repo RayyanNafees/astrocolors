@@ -1,0 +1,27 @@
+---
+import Card from './Card.astro'
+
+import Clock from './SVG/Clock.astro'
+import Realistic from './SVG/Realistic.astro'
+import Simple from './SVG/Simple.astro'
+---
+
+<div class='part1' id='why'>
+  <h2>Why Realtime Colors?</h2>
+  <div class='part1-cards'>
+    <Card title='Saves Time' Icon={Clock}>
+      No need to spend hours implementing different variations of colors. Decide
+      right away!
+    </Card>
+
+    <Card title="It's Realistic" Icon={Realistic}>
+      Color Palettes make it hard to pick. This tool distributes the colors on a
+      real website.
+    </Card>
+
+    <Card title="It's simple" Icon={Simple}>
+      Push a few buttons, and there you have it! Your very own branding colors,
+      ready to export.
+    </Card>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+---
+export interface Porps {
+  Icon: any
+  title: string
+}
+
+const { Icon, title } = Astro.props
+---
+
+<div class='part1-card'>
+  <Icon />
+  <p class='subtitle highlight'>{title}</p>
+  <p>
+    <slot />
+  </p>
+  <div class='part1-card-bg'></div>
+</div>
