@@ -9,6 +9,7 @@
       name='keywords'
       content='colorpicker, color palettes, color theory, UI design, UX design, brand styleguide'
     />
+    <meta name="generator" content={Astro.generator} />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <meta http-equiv='Cache-control' content='max-age=31536000' />
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
@@ -41,7 +42,7 @@
     />
 
     <script
-      src='https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
+      is:inline src='https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
     ></script>
   </head>
 
@@ -51,22 +52,22 @@
     <!-- Slot -->
 
 
-    <script src='../utils/toolbar.ts'></script>
-    <script src='../utils/script.js'></script>
-    <script src='../utils/random-sets.ts'></script>
-    <script src='../utils/misc.ts'></script>
-    <script src='../utils/font-loader.ts'></script>
-    <script
+    <script is:inline src='/toolbar.ts'></script>
+    <script is:inline src='/script.js'></script>
+    <script is:inline src='/random-sets.ts'></script>
+    <script is:inline src='/misc.ts'></script>
+    <script is:inline src='/font-loader.ts'></script>
+    <script is:inline
       src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js'
     ></script>
-    <script
+    <script is:inline
       src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
     ></script>
-    <script
+    <script is:inline
       src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
     ></script>
 
-    <script
+    <script is:inline
       src='https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@master/qrcode.js'
     ></script>
     <script>

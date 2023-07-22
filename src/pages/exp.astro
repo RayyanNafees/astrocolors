@@ -7,10 +7,6 @@ import RealtimeLayout from '../layouts/RealtimeLayout.astro'
 import Mouse from '../components/SVG/Mouse.astro'
 import Circle_i from '../components/SVG/Circle_i.astro'
 import ColorSquircles from '../components/SVG/ColorSquircles.astro'
-import Clock from '../components/SVG/Clock.astro'
-import Realistic from '../components/SVG/Realistic.astro'
-import Simple from '../components/SVG/Simple.astro'
-import Figma from '../components/SVG/Figma.astro'
 
 // Components
 import FAQs from '../components/FAQ/index.astro'
@@ -24,6 +20,8 @@ import Working from '../components/Working.astro'
 import Bento from '../components/Bento.astro'
 import WhyCards from '../components/WhyCards.astro'
 import StayTuned from '../components/StayTuned.astro'
+import Toolbar from '../components/Toolbar.astro'
+import Export from '../components/Export/index.astro'
 ---
 
 <RealtimeLayout>
@@ -65,8 +63,8 @@ import StayTuned from '../components/StayTuned.astro'
     <Featured />
     <StayTuned />
     <Footer />
-    <tool-bar class='toolbar' id='toolbar'></tool-bar>
-    <export-options></export-options>
+    <Toolbar />
+    <Export />
     <div id='tip-bar'>
       <button id='close-btn'>&times;</button>
       <p>
