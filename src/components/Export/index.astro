@@ -1,0 +1,67 @@
+---
+import Tab from './Tab.astro'
+import StyleTab from './StyleTab.astro'
+import '../../styles/global.css'
+---
+
+<div id='overlay'></div>
+
+<div id='popup' style='flex-direction: column; justify-content: flex-start;'>
+  <ul class='tabList'>
+    <li class='tab active' data-tab='tab1'>Download Zip</li>
+    <li class='tab' data-tab='tab2'>CSS</li>
+    <li class='tab' data-tab='tab3'>Tailwind CSS</li>
+    <li class='tab' data-tab='tab4'>SCSS</li>
+    <li class='tab' data-tab='tab5'>CSV</li>
+    <li class='tab' data-tab='tab6'>Shades</li>
+    <li class='tab' data-tab='tab7'>QR</li>
+    <div class='line active'></div>
+  </ul>
+
+  <Tab id='tab1' active={true}>
+    <label for='file-name' class='export-label'> Enter file name</label>
+    <input
+      type='text'
+      name='file-name'
+      id='file-name-input'
+      class='file-name-input'
+      placeholder='e.g., my_colors'
+    />
+    <div class='error-message' id='error-message'></div>
+    <div class='utility-button' style='width: 100%;' id='download'>
+      Download
+    </div>
+  </Tab>
+</div>
+
+<StyleTab id={2} lang='css' />
+<StyleTab id={3} lang='tailwind' />
+<StyleTab id={4} lang='scss' />
+
+<Tab id='tab5' copyId='copy-csv-with-hash' codeId='csv-code-with-hash'>
+  <p>Without #:</p>
+  <div class='code-block'>
+    <pre id='csv-code-without-hash'></pre>
+  </div>
+  <div class='utility-button' id='copy-csv-without-hash' style='width: 100%;'>
+    Copy
+  </div>
+  <p>With #:</p>
+</Tab>
+
+<Tab id='tab6'>
+  <div class='shade-cont'>
+    <div class='text-shades'></div>
+    <div class='bg-shades'></div>
+    <div class='primary-shades'></div>
+    <div class='secondary-shades'></div>
+    <div class='accent-shades'></div>
+  </div>
+</Tab>
+
+<Tab id='tab7'>
+  <div style='padding-top: 10px'>
+    Scan the QR code on your phone or tablet to view the same colors quickly.
+  </div>
+  <div id='qrcode'></div>
+</Tab>

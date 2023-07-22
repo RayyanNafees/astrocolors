@@ -1,0 +1,21 @@
+---
+import Tab from './Tab.astro'
+
+export interface Props{
+    id: number
+    lang: 'tailwind'|'scss'|'css'
+}
+
+const {id, lang} = Astro.props
+
+// CSS Class: tcss for tailwind
+const cls= lang==='tailwind'? 'tcss': lang
+---
+
+<Tab id={`tab${id}`} copyId={`copy-${lang}`} codeId={`${lang}-code`}>
+  <div class='code-type-cont'>
+    <div class={cls+'-hex code-type selected-type'}>HEX</div>
+    <div class={cls+'-rgb code-type'}>RGB</div>
+    <div class={cls+'-hsl code-type'}>HSL</div>
+  </div>
+</Tab>

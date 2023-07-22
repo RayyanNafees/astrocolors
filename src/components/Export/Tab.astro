@@ -1,0 +1,52 @@
+---
+export interface Props {
+  id: string
+  codeId?: string
+  copyId?: string
+  active?: boolean
+}
+
+const {
+  id = 'tab7',
+  codeId = 'tailwind-code',
+  copyId = 'copy-csv-with-hash',
+  active = false,
+} = Astro.props
+---
+
+<div class={`tabContent${active ? ' active' : ''}`} id={id}>
+  <!-- Rest of the childen -->
+  <slot />
+
+  <!-- *Code -->
+  {
+    codeId && (
+      <div class='code-block'>
+        <pre id={codeId} />
+      </div>
+    )
+  }
+
+  <!-- *Copy-->
+  {
+    // Renders Copy button if copyid passed as props
+    copyId && (
+      <div class='utility-button' id={copyId} style='width: 100%;'>
+        Copy
+      </div>
+    )
+  }
+
+  <!-- *Learn More & Request -->
+  <p class='small'>
+    <a href='/docs/exporting' target='_blank' class='link utility-link'>
+      Learn more
+    </a> - <a
+      href='/docs/contributions?colors=000000-ffffff-8fb4ff-ebf1ff-ff8f94#:~:text=You%20can%20submit,a%20Google%20Form.'
+      target='_blank'
+      class='link utility-link'
+    >
+      Request an export option
+    </a>
+  </p>
+</div>
