@@ -1,8 +1,9 @@
 ---
-import '../styles/global.css';
+// Layout & Styles
+import '../styles/global.css'
+import RealtimeLayout from '../layouts/RealtimeLayout.astro'
 
 // SVG Icons
-import Shortcut from '../components/SVG/Shortcut.astro'
 import Mouse from '../components/SVG/Mouse.astro'
 import Circle_i from '../components/SVG/Circle_i.astro'
 import ColorSquircles from '../components/SVG/ColorSquircles.astro'
@@ -16,397 +17,165 @@ import FAQs from '../components/FAQ/index.astro'
 import Testimonies from '../components/Testimonials/index.astro'
 import Featured from '../components/Featured/index.astro'
 import Pricing from '../components/Pricing/index.astro'
-
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
 ---
 
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-  <head>
-    <title>Realtime Colors</title>
-    <meta
-      name="description"
-      content="Visualize your color palettes on a real website for the first time."
-    />
-    <meta
-      name="keywords"
-      content="colorpicker, color palettes, color theory, UI design, UX design, brand styleguide"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Cache-control" content="max-age=31536000" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta property="og:title" content="Realtime Colors" />
-    <meta
-      property="og:description"
-      content="Visualize your color palettes on a real website."
-    />
-    <meta
-      property="og:image"
-      content="https://github.com/juxtopposed/realtimecolors/blob/main/images/preview.png?raw=true"
-    />
-    <meta property="og:url" content="https://realtimecolors.com" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Realtime Colors" />
-    <meta property="og:image:width" content="800" />
-    <meta property="og:image:height" content="418" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <!-- <link rel="stylesheet" href="../styles/global.css" /> -->
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="https://realtimecolors.com/images/favicon.png"
-    />
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-  </head>
-
-  <body>
-    <nav>
-      <div class="logo">
-        <img
-          src="https://realtimecolors.com/images/favicon.png"
-          alt="logoface"
-          class="logoface"
-        />
-        <a href="/">
-          <h2 class="sitename">Realtime Colors</h2>
-        </a>
-      </div>
-      <div class="ham-menu">
-        <button id="hamburger">
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <div class="menu hide">
+<RealtimeLayout>
+  <Navbar />
+  <div id='app'></div>
+  <div class='hero'>
+    <div class='hero-text'>
+      <h1>
+        Visualize Your <span class='color-effect'>Colors</span>
+        <br />On a Real Website
+      </h1>
+      <p class='subtitle'>
+        Choosing a color palette for your website?<br />Use the Toolbar below to
+        realize your choices.
+      </p>
+      <div class='hero-cta'>
         <a
-          href="https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors"
-          target="_blank"
-          class="menu-item menu-item-mobile"
-        >
-          Try Figma Plugin
-
-          <Shortcut />
-        </a>
-        <a href="/palettes" class="menu-item menu-item-mobile"
-          >Palette Generator</a
-        >
-        <a href="/docs" class="menu-item menu-item-mobile">
-          Docs
-          <span
-            style="
-              background-color: var(--text);
-              padding: 0.4em 0.4em 0.4em 0.2em;
-              border-radius: 5px;
-              font-size: 12px;
-              color: var(--bg);
-            "
-            >New!</span
-          >
-        </a>
-        <a href="#sub" class="primary-button menu-item-font">Subscribe</a>
-      </div>
-    </nav>
-    <div id="app"></div>
-    <div class="hero">
-      <div class="hero-text">
-        <h1>
-          Visualize Your <span class="color-effect">Colors</span> <br />On a
-          Real Website
-        </h1>
-        <p class="subtitle">
-          Choosing a color palette for your website?<br />Use the Toolbar below
-          to realize your choices.
-        </p>
-        <div class="hero-cta">
-          <a href="#toolbar" onclick="
+          href='#toolbar'
+          onclick='
           highlightToolbar()
-          " class="primary-button"
-            >Get Started</a
-          >
-          <a href="#how" class="secondary-button">How does it work?</a>
-        </div>
-        <div class="hero-scroll">
-          <Mouse />
-          <p class="sub">Scroll to see more sections</p>
-        </div>
+          '
+          class='primary-button'>Get Started</a
+        >
+        <a href='#how' class='secondary-button'>How does it work?</a>
       </div>
-      <div class="hero-img">
-        <a href="#mondrian-info" id="mondrian-info-icon">
-          <Circle_i />
-        </a>
-        <ColorSquircles/>
+      <div class='hero-scroll'>
+        <Mouse />
+        <p class='sub'>Scroll to see more sections</p>
       </div>
     </div>
-    <main>
-      <div class="part1" id="why">
-        <h2>Why Realtime Colors?</h2>
-        <div class="part1-cards">
-          <div class="part1-card">
-           <Clock />
-            <p class="subtitle highlight">Saves time</p>
-            <p>
-              No need to spend hours implementing different variations of
-              colors. Decide right away!
-            </p>
-            <div class="part1-card-bg"></div>
-          </div>
-          <div class="part1-card">
-            <Realistic />
-            <p class="subtitle highlight">It's Realistic</p>
-            <p>
-              Color Palettes make it hard to pick. This tool distributes the
-              colors on a real website.
-            </p>
-            <div class="part1-card-bg"></div>
-          </div>
-          <div class="part1-card">
-            <Simple />
-            <p class="subtitle highlight">It's simple</p>
-            <p>
-              Push a few buttons, and there you have it! Your very own branding
-              colors, ready to export.
-            </p>
-            <div class="part1-card-bg"></div>
-          </div>
+    <div class='hero-img'>
+      <a href='#mondrian-info' id='mondrian-info-icon'>
+        <Circle_i />
+      </a>
+      <ColorSquircles />
+    </div>
+  </div>
+  <main>
+    <div class='part1' id='why'>
+      <h2>Why Realtime Colors?</h2>
+      <div class='part1-cards'>
+        <div class='part1-card'>
+          <Clock />
+          <p class='subtitle highlight'>Saves time</p>
+          <p>
+            No need to spend hours implementing different variations of colors.
+            Decide right away!
+          </p>
+          <div class='part1-card-bg'></div>
+        </div>
+        <div class='part1-card'>
+          <Realistic />
+          <p class='subtitle highlight'>It's Realistic</p>
+          <p>
+            Color Palettes make it hard to pick. This tool distributes the
+            colors on a real website.
+          </p>
+          <div class='part1-card-bg'></div>
+        </div>
+        <div class='part1-card'>
+          <Simple />
+          <p class='subtitle highlight'>It's simple</p>
+          <p>
+            Push a few buttons, and there you have it! Your very own branding
+            colors, ready to export.
+          </p>
+          <div class='part1-card-bg'></div>
         </div>
       </div>
-      <div class="part6" id="bento">
-        <ul class="bento-wrapper">
-          <li class="first-row-col1 primary-color-box">
-            100K+ Users<br />
-            <span style="font-size: var(--subtitle); font-weight: normal"
-              >and counting...</span
-            >
-          </li>
-          <li class="first-row-col2 secondary-color-box">
-            100% Free!<br />
-            <span style="font-size: var(--p); font-weight: normal"
-              >Sponsored by YOU.</span
-            >
-          </li>
-          <li class="second-row-col1 text-color-box">
-            <Figma />
-            <span style="font-weight: bold">5K+ Plugin Users</span>
-            <a
-              href="https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors"
-              target="_blank"
-              class="link reversed bento-link"
-              >Check it out on Figma</a
-            >
-          </li>
-
-          <li class="second-row-col2 accent-color-box">
-            100+ ProductHunt Upvotes<a
-              href="https://www.producthunt.com/products/real-time-colors"
-              target="_blank"
-              class="link bento-link"
-              >Leave a review</a
-            >
-          </li>
-          <!-- </li> -->
-        </ul>
-      </div>
-      <div class="part2" id="how">
-        <div class="part2-left">
-          <h2>How Does it Work?</h2>
-          <p>You'll get your finalized color palette in 4 simple steps.</p>
-        </div>
-        <div class="part2-right">
-          <p class="one step">
-            Start with two neutral colors for the text and the background.
-          </p>
-          <p class="two step">
-            Choose your primary and secondary colors. Primary is for main CTAs
-            and sections, and Secondary is for less important buttons and info
-            cards.
-          </p>
-          <p class="three step">
-            Accent color is an additional color. It appears in images,
-            highlights, hyperlinks, boxes, cards, etc.
-          </p>
-          <p class="four step">
-            Happy with the results? Press on “Export” and choose among different
-            options to export in various formats, like .zip, .png, CSS, SCSS, QR
-            Code, and more.
-          </p>
-        </div>
-      </div>
-     <Pricing />
-      <FAQs />
-      <Testimonies />
-      <Featured />
-      <div class="part5" id="end">
-        <h1>
-          Your <span class="color-effect">Journey</span>
-          Shouldn't End Here.
-        </h1>
-        <p class="subtitle">
-          Follow me on social media to stay tuned on more projects.
-        </p>
-        <a
-          href="https://twitter.com/juxtopposed"
-          target="_blank"
-          class="primary-button"
+    </div>
+    <div class='part6' id='bento'>
+      <ul class='bento-wrapper'>
+        <li class='first-row-col1 primary-color-box'>
+          100K+ Users<br />
+          <span style='font-size: var(--subtitle); font-weight: normal'
+            >and counting...</span
           >
-          Stay Tuned 
-        </a>
-      </div>
-      <div class="footer" id="footer">
-        <div class="logo">
-          <img src="https://realtimecolors.com/images/favicon.png" alt="logoface" class="logoface" />
-          <a href="/">
-            <h2 class="sitename reversed">Realtime Colors</h2>
-          </a>
-        </div>
-        <div class="footer-cols">
-          <div class="footer-col">
-            <p style="margin: 0">Visualize your color choices.</p>
-            <a
-              href="https://www.producthunt.com/posts/real-time-colors?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-real&#0045;time&#0045;colors"
-              target="_blank"
-            >
-              <img
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=390080&theme=dark"
-                alt="Real&#0045;time&#0032;Colors - Real&#0045;time&#0032;UI&#0032;Color&#0032;Palette&#0032;Tool | Product Hunt"
-                style="width: 250px; height: 54px"
-                width="250"
-                height="54"
-              />
-            </a>
-            <script
-              type="text/javascript"
-              src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"
-            ></script>
-            <script type="text/javascript">
-              kofiwidget2.init('Support Me on Ko-fi', '#221D21', 'Z8Z2L1JGX')
-              kofiwidget2.draw()
-            </script>
-          </div>
-          <div class="footer-col">
-            <div class="reversed sub menu-item-header">EXPLORE</div>
-            <a
-              href="https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors"
-              target="_blank"
-              class="menu-item"
-            >
-              Try Figma Plugin
+        </li>
+        <li class='first-row-col2 secondary-color-box'>
+          100% Free!<br />
+          <span style='font-size: var(--p); font-weight: normal'
+            >Sponsored by YOU.</span
+          >
+        </li>
+        <li class='second-row-col1 text-color-box'>
+          <Figma />
+          <span style='font-weight: bold'>5K+ Plugin Users</span>
+          <a
+            href='https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors'
+            target='_blank'
+            class='link reversed bento-link'>Check it out on Figma</a
+          >
+        </li>
 
-             <Shortcut />
-            </a>
-            <a href="/palettes" class="menu-item">Palette Generator</a>
-            <a href="/docs" class="menu-item reversed">
-              Docs
-              <span
-                style="
-                  background-color: var(--bg);
-                  padding: 0.4em 0.4em 0.4em 0.2em;
-                  border-radius: 5px;
-                  font-size: 12px;
-                  color: var(--text);
-                "
-                >New!</span
-              >
-            </a>
-          </div>
-          <div class="footer-col">
-            <div class="reversed sub menu-item-header">LET'S CONNECT</div>
-            <a
-              href="https://twitter.com/juxtopposed"
-              class="menu-item reversed"
-              target="_blank"
-              >Twitter</a
-            >
-            <a
-              href="https://codepen.io/Juxtopposed"
-              target="_blank"
-              class="menu-item reversed"
-              >CodePen</a
-            >
-            <a
-              href="https://www.youtube.com/@juxtopposed"
-              target="_blank"
-              class="menu-item reversed"
-              >YouTube</a
-            >
-            <a
-              href="https://dribbble.com/juxtopposed"
-              target="_blank"
-              class="menu-item reversed"
-              >Dribbble</a
-            >
-            <a
-              href="https://github.com/juxtopposed"
-              target="_blank"
-              class="menu-item reversed"
-              >GitHub</a
-            >
-          </div>
-        </div>
-        <div
-          style="
-            width: 100%;
-            height: 1px;
-            background-color: var(--bg);
-            opacity: 20%;
-            margin-top: 1em;
-          "
-        ></div>
-        <div>
-          <p class="sub">
-            Feedback? Suggestions? Features you'd like to see?
-            <a
-              href="mailto:juxtopposed.me@gmail.com"
-              target="_blank"
-              class="link reversed"
-              >Contact me!</a
-            >
-          </p>
-          <p class="sub">
-            Made with &lt;3 by
-            <a
-              href="https://twitter.com/juxtopposed"
-              target="_blank"
-              class="link reversed"
-            >
-              @Juxtopposed</a
-            >
-          </p>
-          <p class="sub">Copyright © 2023 All Rights Reserved</p>
-        </div>
+        <li class='second-row-col2 accent-color-box'>
+          100+ ProductHunt Upvotes<a
+            href='https://www.producthunt.com/products/real-time-colors'
+            target='_blank'
+            class='link bento-link'>Leave a review</a
+          >
+        </li>
+        <!-- </li> -->
+      </ul>
+    </div>
+    <div class='part2' id='how'>
+      <div class='part2-left'>
+        <h2>How Does it Work?</h2>
+        <p>You'll get your finalized color palette in 4 simple steps.</p>
       </div>
-      <tool-bar class="toolbar" id="toolbar"></tool-bar>
-      <export-options></export-options>
-      <div id="tip-bar">
-        <button id="close-btn">&times;</button>
-        <p>
-          <b>Tip:</b>
-          Press the Spacebar to randomize faster!
-        </p>cls
-
+      <div class='part2-right'>
+        <p class='one step'>
+          Start with two neutral colors for the text and the background.
+        </p>
+        <p class='two step'>
+          Choose your primary and secondary colors. Primary is for main CTAs and
+          sections, and Secondary is for less important buttons and info cards.
+        </p>
+        <p class='three step'>
+          Accent color is an additional color. It appears in images, highlights,
+          hyperlinks, boxes, cards, etc.
+        </p>
+        <p class='four step'>
+          Happy with the results? Press on “Export” and choose among different
+          options to export in various formats, like .zip, .png, CSS, SCSS, QR
+          Code, and more.
+        </p>
       </div>
-    </main>
-    <script src="../utils/toolbar.ts"></script>
-    <script src="../utils/script.js"></script>  
-    <script src="../utils/random-sets.ts"></script>
-    <script src="../utils/misc.ts"></scrip>
-    <script src="../utils/font-loader.ts"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@master/qrcode.js"></script>
-    <script>
-      ;(function () {
-        if (typeof _bsa !== 'undefined' && _bsa) {
-          _bsa.init('flexbar', 'CWYDKK7Y', 'placement:realtimecolorscom')
-        }
-      })()
-    </script>
-  </body>
-</html>
+    </div>
+    <Pricing />
+    <FAQs />
+    <Testimonies />
+    <Featured />
+    <div class='part5' id='end'>
+      <h1>
+        Your <span class='color-effect'>Journey</span>
+        Shouldn't End Here.
+      </h1>
+      <p class='subtitle'>
+        Follow me on social media to stay tuned on more projects.
+      </p>
+      <a
+        href='https://twitter.com/juxtopposed'
+        target='_blank'
+        class='primary-button'
+      >
+        Stay Tuned
+      </a>
+    </div>
+    <Footer />
+    <tool-bar class='toolbar' id='toolbar'></tool-bar>
+    <export-options></export-options>
+    <div id='tip-bar'>
+      <button id='close-btn'>&times;</button>
+      <p>
+        <b>Tip:</b>
+        Press the Spacebar to randomize faster!
+      </p>cls
+    </div>
+  </main>
+</RealtimeLayout>

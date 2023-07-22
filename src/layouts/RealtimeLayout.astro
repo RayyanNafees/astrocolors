@@ -1,0 +1,80 @@
+<html lang='en' data-theme='light'>
+  <head>
+    <title>Realtime Colors</title>
+    <meta
+      name='description'
+      content='Visualize your color palettes on a real website for the first time.'
+    />
+    <meta
+      name='keywords'
+      content='colorpicker, color palettes, color theory, UI design, UX design, brand styleguide'
+    />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <meta http-equiv='Cache-control' content='max-age=31536000' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta property='og:title' content='Realtime Colors' />
+    <meta
+      property='og:description'
+      content='Visualize your color palettes on a real website.'
+    />
+    <meta
+      property='og:image'
+      content='https://github.com/juxtopposed/realtimecolors/blob/main/images/preview.png?raw=true'
+    />
+    <meta property='og:url' content='https://realtimecolors.com' />
+    <meta property='og:type' content='website' />
+    <meta property='og:site_name' content='Realtime Colors' />
+    <meta property='og:image:width' content='800' />
+    <meta property='og:image:height' content='418' />
+    <meta name='twitter:card' content='summary_large_image' />
+    <!-- <link rel="stylesheet" href="../styles/global.css" /> -->
+    <link rel='preconnect' href='https://rsms.me/' />
+    <link rel='stylesheet' href='https://rsms.me/inter/inter.css' />
+    <link
+      rel='stylesheet'
+      href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+    />
+    <link
+      rel='icon'
+      type='image/x-icon'
+      href='https://realtimecolors.com/images/favicon.png'
+    />
+
+    <script
+      src='https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
+    ></script>
+  </head>
+
+  <body>
+    <!-- *Slot -->
+    <slot />
+    <!-- Slot -->
+
+
+    <script src='../utils/toolbar.ts'></script>
+    <script src='../utils/script.js'></script>
+    <script src='../utils/random-sets.ts'></script>
+    <script src='../utils/misc.ts'></script>
+    <script src='../utils/font-loader.ts'></script>
+    <script
+      src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js'
+    ></script>
+    <script
+      src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
+    ></script>
+    <script
+      src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+    ></script>
+
+    <script
+      src='https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@master/qrcode.js'
+    ></script>
+    <script>
+      !(function () {
+        if (typeof _bsa !== 'undefined' && _bsa) {
+          _bsa.init('flexbar', 'CWYDKK7Y', 'placement:realtimecolorscom')
+        }
+      })()
+    </script>
+  </body>
+</html>

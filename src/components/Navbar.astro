@@ -1,0 +1,48 @@
+---
+import Shortcut from './SVG/Shortcut.astro'
+---
+
+<nav>
+  <div class='logo'>
+    <img
+      src='https://realtimecolors.com/images/favicon.png'
+      alt='logoface'
+      class='logoface'
+    />
+    <a href='/'>
+      <h2 class='sitename'>Realtime Colors</h2>
+    </a>
+  </div>
+  <div class='ham-menu'>
+    <button id='hamburger'>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class='menu hide'>
+    <a
+      href='https://www.figma.com/community/plugin/1234060894101724457/Realtime-Colors'
+      target='_blank'
+      class='menu-item menu-item-mobile'
+    >
+      Try Figma Plugin
+
+      <Shortcut />
+    </a>
+    <a href='/palettes' class='menu-item menu-item-mobile'>Palette Generator</a>
+    <a href='/docs' class='menu-item menu-item-mobile'>
+      Docs
+      <span
+        style='
+          background-color: var(--text);
+          padding: 0.4em 0.4em 0.4em 0.2em;
+          border-radius: 5px;
+          font-size: 12px;
+          color: var(--bg);
+        '
+        >New!</span
+      >
+    </a>
+    <a href='#sub' class='primary-button menu-item-font'>Subscribe</a>
+  </div>
+</nav>
