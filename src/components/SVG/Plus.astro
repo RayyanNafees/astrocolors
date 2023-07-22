@@ -1,5 +1,9 @@
 ---
-const { contrast } = Astro.props
+export interface Props{
+  contrast?: boolean
+}
+
+const { contrast =false} = Astro.props
 ---
 
 <svg

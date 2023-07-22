@@ -1,0 +1,27 @@
+---
+import Plus from '../SVG/Plus.astro'
+
+export interface Props{
+    q: string // question
+    mondrian?: boolean // to add mondrean classes or not
+    contrast?: boolean // to add contrast classes or not
+}
+
+const {q, mondrian=false, contrast=false} = Astro.props;
+
+let faqId;
+if (contrast) faqId='contrast-info'
+if (mondrian) faqId='mondrian-info'
+---
+
+<div class:list={['faq', {'mondrian-faq': mondrian}]} id={faqId}>
+  <div class='faq-q'>
+    <h3>{q}</h3>
+    <Plus contrast={contrast}/>
+  </div>
+  <div class:list={['faq-a', {'contrast-answer': contrast}, {'mondrian-answer': mondrian}]}>
+    <p>
+      <slot />
+    </p>
+  </div>
+</div>

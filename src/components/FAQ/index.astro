@@ -1,0 +1,87 @@
+---
+import Plus from '../SVG/Plus.astro'
+import FAQ from './FAQs.astro'
+---
+
+<div class='part4' id='faq'>
+  <div class='part4-heading'>
+    <h2>FAQ</h2>
+    <p>Answers to some questions you might have.</p>
+  </div>
+  <div class='faq-list'>
+    <FAQ q='How many colors should I choose?'>
+      Normally, 3 colors are absolutely fine (meaning background, text, and one
+      accent color).<br />However, if you want, you can have more. Usually, we
+      don't add more than 6 colors across a platform. It would just make things
+      too... complicated. Plus, it makes it hard to keep the colors consistent
+      throughout the design.
+    </FAQ>
+    <FAQ q='How does the contrast checker work?' contrast={true}>
+      <p>
+        The contrast checker shows the contrast ratio between the selected color
+        and its background/foreground.<br />
+        <br />The contrast checker has 3 lights:
+      </p>
+      <ul style='line-height: 2; font-size: var(--p)'>
+        <li>
+          <b>Red:</b>
+          The contrast ratio does not pass either AAA or AA. Therefore, both large
+          and normal texts are hardly readable.
+        </li>
+        <li>
+          <b>Yellow:</b>
+          The contrast ratio might pass AA but won't pass AAA. Large texts might
+          be readable but normal texts are probably not readable.
+        </li>
+        <li>
+          <b>Green:</b>
+          The contrast ratio passes both AA and AAA. Both large and normal texts
+          are readable.
+        </li>
+      </ul>
+      <p>
+        Learn more about the
+        <a href='/docs/contrast-checker' target='_blank' class='link'
+          >contrast checker</a
+        >
+        .
+      </p>
+    </FAQ>
+    <FAQ q='What will I receive after downloading the exported file?'>
+      After downloading through export options, you will receive a .zip file.
+      This file is compressed, so you will have to extract it.<br />After
+      extracting it, you will see a .png file and a .txt file. The .png image
+      shows your color palette in squares next to each other. The .txt file
+      includes the color codes in HEX and RGB. You can send these files to
+      designers or developers, or just use them in your project.
+    </FAQ>
+    <FAQ q='Why do some colors have some transparency?'>
+      This website allows you to choose only opaque colors. However, to make the
+      design more appealing, I've made some parts more transparent by adding a
+      bit of opacity to them. Of course, you can use these colors however you
+      want in your own projects.
+    </FAQ>
+    <FAQ q='What does the hero image represent?' mondrian={true}>
+      The hero image is inspired by Piet Mondrian's
+      <b>Composition with Large Red Plane, Yellow, Black, Grey and Blue</b>
+      . This composition keeps the ratio of the main colors (red, blue, and yellow)
+      very close to the 60-30-10 rule of UI design. This is mainly why I've chosen
+      this composition to visualize the distribution of the colors on the page.
+    </FAQ>
+    <FAQ q='How can I set up the fonts?'>
+      You can either upload a font file from your device locally in the formats
+      .otf, .ttf, .woff, or .woff2, or you can enter the name of a font from
+      Google Fonts or the fonts installed on your device. Read more about
+      <a href='/docs/font-setup' target='_blank' class='link'>Font Setup</a>
+      .
+    </FAQ>
+    <FAQ q='How can I learn more about this tool?'>
+      You can find more information about Realtime Colors on the
+      <a href='/docs' target='_blank' class='link'>Docs</a> . You can also
+      <a href='mailto:juxtopposed.me@gmail.com' target='_blank' class='link'
+      ></a>
+      email me
+    </FAQ>
+    any questions you might have.
+  </div>
+</div>
