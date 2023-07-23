@@ -20,7 +20,7 @@ const hueUnderlays = document.querySelectorAll('.color-underlay');
 
 // FAQ
 
-const faqQuestions = document.querySelectorAll(".faq");
+export const faqQuestions = document.querySelectorAll<HTMLElement>(".faq");
 const faqAnswers = document.querySelectorAll(".faq-a");
 const faqIcons = document.querySelectorAll(".faq-icon");
 

@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "astro": "^2.8.5",
+    "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "nanostores": "^0.9.3",
     "qrcode": "^1.5.3"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/qrcode": "^1.5.1",
     "unocss": "^0.53.5"
   }

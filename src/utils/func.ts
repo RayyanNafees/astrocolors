@@ -4,8 +4,10 @@
  * @param {number} wait the number of miliseconds to wait till next execution
  * @returns {Function} The debounced function that will `wait` for the next execution
  */
-export const debounce = (func: Function, wait: number): Function  => {
-  let timeout: number
+
+
+export const debounce = (func: any, wait: number): Function  => {
+  let timeout: ReturnType<typeof setTimeout>
   return  (...args: any[]) => {
     const context=  this
     clearTimeout(timeout)

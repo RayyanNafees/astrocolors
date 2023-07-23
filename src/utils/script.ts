@@ -1,12 +1,22 @@
 import QRcode from 'qrcode'
+import JSZip from 'jszip'
+// import {} from 'FileSaver'
+import { saveAs } from 'file-saver'
+import { faqQuestions } from './misc'
 
 const primaryButtons = document.querySelectorAll<HTMLElement>('.primary-button')
 const secondaryButtons =
   document.querySelectorAll<HTMLElement>('.secondary-button')
 const partTwo = document.querySelectorAll<HTMLElement>('.part2')
-const primbuttnColorClass = document.querySelector<HTMLElement>('.primbuttn')
-const secbuttnColorClass = document.querySelector<HTMLElement>('.secbuttn')
-const accentColorClass = document.querySelector<HTMLElement>('.accent')
+const primbuttnColorClass = document.querySelector<HTMLElement>(
+  '.primbuttn'
+) as HTMLElement
+const secbuttnColorClass = document.querySelector<HTMLElement>(
+  '.secbuttn'
+) as HTMLElement
+const accentColorClass = document.querySelector<HTMLElement>(
+  '.accent'
+) as HTMLElement
 const primColorClass = document.querySelector<HTMLElement>('.prim')
 const secColorClass = document.querySelector<HTMLElement>('.sec')
 const primaryColor = <HTMLInputElement>document.getElementById('prim')
@@ -71,7 +81,7 @@ interface HSV {
 
 interface HSL {
   h: number
-  s:number
+  s: number
   l: number
 }
 
@@ -331,7 +341,8 @@ function updateUrlParams() {
 
 const updateColor = (index: number) => {
   const hexInputs = document.querySelectorAll<HTMLInputElement>('.hex-input')
-  const colorPickers = document.querySelectorAll<HTMLInputElement>('.colorpicker')
+  const colorPickers =
+    document.querySelectorAll<HTMLInputElement>('.colorpicker')
 
   const selectedColor =
     document.querySelectorAll<HTMLElement>('.selected-color')[index]
@@ -344,8 +355,8 @@ const updateColor = (index: number) => {
   )
 
   const currentColor = getCurrentColor(index)
-  const [r,g,b] = currentColor;
-  const calculatedHexValue = rgbToHex(r,g,b)
+  const [r, g, b] = currentColor
+  const calculatedHexValue = rgbToHex(r, g, b)
 
   if (
     hexInput.value !== calculatedHexValue &&
@@ -363,7 +374,7 @@ const bindSlInputEvents = (index: number) => {
     '.sat-lightness-picker'
   )[index]
 
-  const setSlPosition = (xPos: number, yPos:number) => {
+  const setSlPosition = (xPos: number, yPos: number) => {
     const pickerRect = slPicker.getBoundingClientRect()
     const offsetX = pickerRect.left + window.scrollX
     const offsetY = pickerRect.top + window.scrollY
@@ -393,14 +404,14 @@ const bindSlInputEvents = (index: number) => {
     updateColor(index)
   }
 
-  const handleSlMouseDown = (e:MouseEvent) => {
+  const handleSlMouseDown = (e: MouseEvent) => {
     e.preventDefault()
     document.addEventListener('mousemove', handleSlMouseMove)
     document.addEventListener('mouseup', handleSlMouseUp)
     setSlPosition(e.pageX, e.pageY)
   }
 
-  const handleSlMouseMove = (e:MouseEvent) => {
+  const handleSlMouseMove = (e: MouseEvent) => {
     e.preventDefault()
     setSlPosition(e.pageX, e.pageY)
   }
@@ -437,7 +448,7 @@ let lastSelectedColorSet = null
 let isDarkMode = false
 
 //* DONE
-function calculateLightness(hexColor:string): number {
+function calculateLightness(hexColor: string): number {
   const hslColor = hexToHSL(hexColor)
 
   const lightness = hslColor.l
@@ -462,7 +473,7 @@ function hexToHSL(hexColor: string): HSL {
 
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
-  let h!:number, s, l
+  let h!: number, s, l
 
   l = (max + min) / 2
 
@@ -504,8 +515,7 @@ function checkDarkOrLight() {
     const themeDiv = <HTMLElement>document.getElementById('theme')
     themeDiv.style.backgroundColor = isDarkMode ? 'black' : ''
 
-    const themeContainer =
-      themeDiv.querySelectorAll('.darkorlight-cont')!
+    const themeContainer = themeDiv.querySelectorAll('.darkorlight-cont')!
     const themeWrapper = themeContainer.children[0]
     themeWrapper.style.transform = 'translateY(-30px)'
   } else if (lightness < 50) {
@@ -555,10 +565,10 @@ hexInputs.forEach((hexInput) => {
   hexInput.addEventListener('input', handleHexInputChange)
 })
 
-function handleHexInputChange(event:Event): any {
+function handleHexInputChange(event: Event): any {
   const target = event.target! as HTMLInputElement
   const hexValue = target.value
-  const parentOption =target.closest('.colors-option')!
+  const parentOption = target.closest('.colors-option')!
 
   if (parentOption.classList.contains('prim')) {
     primaryColor.value = hexValue
@@ -1034,14 +1044,18 @@ const secbuttnLock = document.getElementById('secbuttn-lock')
 const accentLock = document.getElementById('accent-lock')
 
 // lock open / close
-const lockButtons = Array.from(document.querySelectorAll<HTMLElement>('.lock-button'))!
+const lockButtons = Array.from(
+  document.querySelectorAll<HTMLElement>('.lock-button')
+)!
 
 lockButtons.forEach((lockButton) => {
   lockButton?.addEventListener('click', () => {
     lockButton
       ?.querySelector<HTMLElement>('.lock-closed')
       ?.classList.toggle('show')
-    lockButton?.querySelector<HTMLElement>('.lock-open').classList.toggle('show')
+    lockButton
+      ?.querySelector<HTMLElement>('.lock-open')
+      .classList.toggle('show')
   })
 })
 
@@ -1051,8 +1065,8 @@ let isPrimbuttnLocked = false
 let isSecbuttnLocked = false
 let isAccentLocked = false
 
-interface Scheme{
-  baseHue:null|string
+interface Scheme {
+  baseHue: null | string
 }
 
 primaryLock?.addEventListener('click', function () {
@@ -1186,7 +1200,7 @@ function hexToHue(hex: string) {
   return Math.round(hsl[0])
 }
 
-function rgbToHsl(r: number, g:number, b:number): number[] {
+function rgbToHsl(r: number, g: number, b: number): number[] {
   r /= 255
   g /= 255
   b /= 255
@@ -1265,7 +1279,7 @@ function randomizeColors() {
   const colorsParam = searchParams.get('colors')
 
   const colorHex = colorsParam?.split('-')
-  const lockedColors:string[] = []
+  const lockedColors: string[] = []
 
   if (!isPrimaryLocked) {
     primaryColor.value = hexColors?.[0].slice(0, 7) as string
@@ -1307,28 +1321,31 @@ function randomizeColors() {
 
   document.documentElement.style.setProperty(
     '--text',
-    isPrimaryLocked ? primaryColor.value : hexColors?.[0] as string
+    isPrimaryLocked ? primaryColor.value : (hexColors?.[0] as string)
   )
   document.documentElement.style.setProperty(
     '--bg',
-    isSecondaryLocked ? secondaryColor.value : hexColors?.[1] as string
+    isSecondaryLocked ? secondaryColor.value : (hexColors?.[1] as string)
   )
   document.documentElement.style.setProperty(
     '--primary',
-    isPrimbuttnLocked ? primbuttnColor.value : hexColors?.[2] as string
+    isPrimbuttnLocked ? primbuttnColor.value : (hexColors?.[2] as string)
   )
   document.documentElement.style.setProperty(
     '--secondary',
-    isSecbuttnLocked ? secbuttnColor.value : hexColors?.[3] as string
+    isSecbuttnLocked ? secbuttnColor.value : (hexColors?.[3] as string)
   )
   document.documentElement.style.setProperty(
     '--accent',
-    isAccentLocked ? accentColor.value : hexColors?.[4] as string
+    isAccentLocked ? accentColor.value : (hexColors?.[4] as string)
   )
 
   lastSelectedColorSet = randomColorScheme?.name
 
-  function setHexInputValues(hexInputs: NodeListOf<HTMLInputElement>, colors: string[]) {
+  function setHexInputValues(
+    hexInputs: NodeListOf<HTMLInputElement>,
+    colors: string[]
+  ) {
     for (let i = 0; i < hexInputs.length; i++) {
       hexInputs[i].value = colors[i]
     }
@@ -1349,7 +1366,7 @@ function randomizeColors() {
   updateContrastColor('--bgcontrast', secColorClass)
 }
 // TODO- Add to colors
-function hslToHex(h: number, s:number, l: number): string {
+function hslToHex(h: number, s: number, l: number): string {
   h /= 360
   s /= 100
   l /= 100
@@ -1637,13 +1654,15 @@ accentColor.addEventListener('input', checkContrast)
 
 const downloadButton = document.getElementById('download')
 const fileNameInput = document.getElementById('file-name-input')
-const errorMessage = document.getElementById('error-message')
+const errorMessage = document.getElementById('error-message') as HTMLElement
 
 /**
  * Generates the zip file to be downloaded
  */
-downloadButton.addEventListener('click', () => {
-  const fileNameInput = document.getElementById('file-name-input')
+downloadButton?.addEventListener('click', () => {
+  const fileNameInput = <HTMLInputElement>(
+    document.getElementById('file-name-input')
+  )
   const fileName = fileNameInput.value.trim()
 
   if (!isValidFileName(fileName)) {
@@ -1664,7 +1683,7 @@ downloadButton.addEventListener('click', () => {
   ]
 
   const canvas = document.createElement('canvas')
-  const ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
   canvas.width = colorValues.length * 100
   canvas.height = 100
   for (let i = 0; i < colorValues.length; i++) {
@@ -1699,24 +1718,24 @@ Thanks for using RealtimeColors.com!`
   })
 })
 
-fileNameInput.addEventListener('input', () => {
+fileNameInput?.addEventListener('input', () => {
   errorMessage.style.display = 'none'
 })
 // *DONE
-function isValidFileName(fileName) {
+function isValidFileName(fileName: string) {
   const validFileNameRegex = /^[a-zA-Z0-9-_]+(\.[a-zA-Z0-9]+)?$/
   return validFileNameRegex.test(fileName)
 }
 
 // * Done
-function hexToRgb(hex) {
+function hexToRgb(hex: string) {
   const r = parseInt(hex.substring(1, 3), 16)
   const g = parseInt(hex.substring(3, 5), 16)
   const b = parseInt(hex.substring(5, 7), 16)
   return `${r}, ${g}, ${b}`
 }
 // * Done
-function dataURItoBlob(dataURI) {
+function dataURItoBlob(dataURI: string) {
   const byteString = atob(dataURI.split(',')[1])
   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
   const ab = new ArrayBuffer(byteString.length)
@@ -1730,7 +1749,7 @@ function dataURItoBlob(dataURI) {
 document.addEventListener('keydown', function (event) {
   if ((event.ctrlKey || event.metaKey) && event.key === 'e') {
     event.preventDefault()
-    document.getElementById('export').click()
+    document.getElementById('export')?.click()
   }
 })
 
@@ -1740,11 +1759,11 @@ document.addEventListener('keydown', function (event) {
 
 // CONTRAST CHECKER
 // *DONE
-function getBrightness(color) {
+function getBrightness(color: string) {
   let hex = color
 
   if (color.substring(0, 3) === 'rgb') {
-    const [r, g, b] = color.match(/\d+/g)
+    const [r, g, b] = color.match(/\d+/g) as string[]
     hex = '#' + ((1 << 24) + (+r << 16) + (+g << 8) + +b).toString(16).slice(1)
   }
 
@@ -1761,10 +1780,22 @@ function getBrightness(color) {
 
   return (l * 100) / 255
 }
-//* DONE
-function debounce(func, wait) {
-  let timeout
-  return function (...args) {
+// DONE
+// function debounce(func, wait) {
+//   let timeout
+//   return function (...args) {
+//     const context = this
+//     clearTimeout(timeout)
+//     timeout = setTimeout(() => {
+//       func.apply(context, args)
+//     }, wait)
+//   }
+// }
+
+// DOUBT: May break
+export const debounce = (func: Function, wait: number): Function => {
+  let timeout: ReturnType<typeof setTimeout>
+  return (...args: any[]) => {
     const context = this
     clearTimeout(timeout)
     timeout = setTimeout(() => {
@@ -1782,7 +1813,10 @@ const accentBox = document.querySelectorAll<HTMLElement>('.accent-color-box')
 // CONTRAST CHECKING RULES
 
 function checkContrast() {
-  const handleInput = (colorValue, elements) => {
+  const handleInput = (
+    colorValue: string,
+    elements: NodeListOf<HTMLElement>
+  ) => {
     const primaryColorValue = primaryColor.value
     const secondaryColorValue = secondaryColor.value
     const primaryBrightness = getBrightness(primaryColorValue)
@@ -1871,8 +1905,7 @@ function getBrightnessAbs() {
     secondaryBrightness,
     primaryColorValue
   )
-
-  // Update FAQ questions
+  //FIXME: Update FAQ questions
   updateButtonStyle(
     faqQuestions,
     secbuttnColorClass,
@@ -1932,32 +1965,32 @@ function getBrightnessAbs() {
 }
 
 function updateButtonStyle(
-  buttons,
-  colorClass,
-  colorValue,
-  primaryBrightness,
-  secondaryBrightness,
-  primaryColorValue
+  buttons: NodeListOf<HTMLElement>,
+  colorClass: HTMLElement,
+  colorValue: string,
+  primaryBrightness: number,
+  secondaryBrightness: number,
+  primaryColorValue: string
 ) {
   const contrastRatio = getContrastRatio(colorValue, primaryColorValue)
 
   if (primaryBrightness < secondaryBrightness && contrastRatio < 4.5) {
-    buttons.forEach((button) => {
+    buttons.forEach((button: HTMLElement) => {
       button.style.color = 'var(--bg)'
       colorClass.style.color = 'var(--bg)'
     })
   } else if (primaryBrightness < secondaryBrightness && contrastRatio > 4.5) {
-    buttons.forEach((button) => {
+    buttons.forEach((button: HTMLElement) => {
       button.style.color = 'var(--text)'
       colorClass.style.color = 'var(--text)'
     })
   } else if (primaryBrightness > secondaryBrightness && contrastRatio < 4.5) {
-    buttons.forEach((button) => {
+    buttons.forEach((button: HTMLElement) => {
       button.style.color = 'var(--bg)'
       colorClass.style.color = 'var(--bg)'
     })
   } else if (primaryBrightness > secondaryBrightness && contrastRatio > 4.5) {
-    buttons.forEach((button) => {
+    buttons.forEach((button: HTMLElement) => {
       button.style.color = 'var(--text)'
       colorClass.style.color = 'var(--text)'
     })
@@ -1965,11 +1998,11 @@ function updateButtonStyle(
 }
 
 function updateAccentColor(
-  colorClass,
-  colorValue,
-  primaryBrightness,
-  secondaryBrightness,
-  primaryColorValue
+  colorClass: HTMLElement,
+  colorValue: string,
+  primaryBrightness: number,
+  secondaryBrightness: number,
+  primaryColorValue: string
 ) {
   const contrastRatio = getContrastRatio(colorValue, primaryColorValue)
 
@@ -1986,7 +2019,7 @@ function updateAccentColor(
 
 // CONTRAST CHECKING FUNCTION
 //*DONE
-function getContrastRatio(background, foreground) {
+function getContrastRatio(background: string, foreground: string) {
   const bg = parseColor(background)
   const fg = parseColor(foreground)
 
@@ -2000,7 +2033,7 @@ function getContrastRatio(background, foreground) {
   }
 }
 //* DONE
-function parseColor(color) {
+function parseColor(color: string) {
   const regexRgb = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/
   const matchRgb = regexRgb.exec(color)
   if (matchRgb) {
@@ -2028,7 +2061,7 @@ function parseColor(color) {
   throw new Error('Invalid color value: ' + color)
 }
 //* DONE
-function getLuminance(color) {
+function getLuminance(color: RGB) {
   const r = color.r / 255
   const g = color.g / 255
   const b = color.b / 255
@@ -2057,9 +2090,9 @@ function updateSlug() {
   window.history.replaceState({}, document.title, `?colors=${slug}`)
 }
 
-function applyColorsFromSlug() {
+function applyColorsFromSlug(slug?: string) {
   const searchParams = new URLSearchParams(window.location.search)
-  const slug = searchParams.get('colors')
+  slug = slug || searchParams.get('colors') as string
 
   if (slug) {
     const decodedColors = slug
@@ -2145,7 +2178,7 @@ function updateColors() {
 
 // redo and undo
 
-let urlSlugs = []
+let urlSlugs = [] as string[]
 let currentSlugIndex = -1
 
 function addSlugToArray() {
@@ -2199,7 +2232,7 @@ setInterval(function () {
   }
 })
 
-document.getElementById('undo').addEventListener('click', function () {
+document.getElementById('undo')?.addEventListener('click', function () {
   if (currentSlugIndex > 0) {
     currentSlugIndex--
     let slug = urlSlugs[currentSlugIndex]
@@ -2210,7 +2243,7 @@ document.getElementById('undo').addEventListener('click', function () {
   }
 })
 
-document.getElementById('redo').addEventListener('click', function () {
+document.getElementById('redo')?.addEventListener('click', function () {
   if (currentSlugIndex < urlSlugs.length - 1) {
     currentSlugIndex++
     let slug = urlSlugs[currentSlugIndex]
@@ -2226,14 +2259,14 @@ document.addEventListener('keydown', function (event) {
     event.key === 'ArrowLeft' ||
     ((event.ctrlKey || event.metaKey) && event.key === 'z')
   ) {
-    document.getElementById('undo').click()
+    document.getElementById('undo')?.click()
   } else if (
     event.key === 'ArrowRight' ||
     ((event.ctrlKey || event.metaKey) &&
       event.shiftKey &&
       (event.key === 'z' || event.key === 'Z'))
   ) {
-    document.getElementById('redo').click()
+    document.getElementById('redo')?.click()
   }
 })
 
@@ -2242,15 +2275,15 @@ function updateUndoRedoButtons() {
   let redoButton = document.getElementById('redo')
 
   if (currentSlugIndex === 0) {
-    undoButton.classList.add('disabled')
+    undoButton?.classList.add('disabled')
   } else {
-    undoButton.classList.remove('disabled')
+    undoButton?.classList.remove('disabled')
   }
 
   if (currentSlugIndex === urlSlugs.length - 1) {
-    redoButton.classList.add('disabled')
+    redoButton?.classList.add('disabled')
   } else {
-    redoButton.classList.remove('disabled')
+    redoButton?.classList.remove('disabled')
   }
 }
 
@@ -2271,30 +2304,30 @@ const fontsRolloutIcon =
   document.querySelector<HTMLElement>('.fonts-rollout svg')
 
 if (window.innerWidth < 1100) {
-  expandButtonFonts.addEventListener('click', () => {
-    colorSpan.classList.remove('hide')
+  expandButtonFonts?.addEventListener('click', () => {
+    colorSpan?.classList.remove('hide')
   })
 } else {
-  expandButtonFonts.addEventListener('click', () => {
-    colorSpan.classList.add('hide')
+  expandButtonFonts?.addEventListener('click', () => {
+    colorSpan?.classList.add('hide')
   })
 }
 
-expandButtonColors.addEventListener('click', () => {
-  expandButtonColors.classList.add('hide')
-  expandButtonFonts.classList.remove('hide')
-  colorSpan.classList.toggle('hide')
-  fontSpan.classList.add('hide')
-  colorsRolloutIcon.classList.toggle('rotateX')
-  fontsRolloutIcon.classList.remove('rotateX')
+expandButtonColors?.addEventListener('click', () => {
+  expandButtonColors?.classList.add('hide')
+  expandButtonFonts?.classList.remove('hide')
+  colorSpan?.classList.toggle('hide')
+  fontSpan?.classList.add('hide')
+  colorsRolloutIcon?.classList.toggle('rotateX')
+  fontsRolloutIcon?.classList.remove('rotateX')
 })
 
-expandButtonFonts.addEventListener('click', () => {
-  expandButtonFonts.classList.add('hide')
-  expandButtonColors.classList.remove('hide')
-  fontSpan.classList.toggle('hide')
-  fontsRolloutIcon.classList.toggle('rotateX')
-  colorsRolloutIcon.classList.remove('rotateX')
+expandButtonFonts?.addEventListener('click', () => {
+  expandButtonFonts?.classList.add('hide')
+  expandButtonColors?.classList.remove('hide')
+  fontSpan?.classList.toggle('hide')
+  fontsRolloutIcon?.classList.toggle('rotateX')
+  colorsRolloutIcon?.classList.remove('rotateX')
 })
 
 // expanding fonts
@@ -2305,22 +2338,22 @@ const textFontsIcon = document.querySelector<HTMLElement>(
   '.text-fonts-buttn svg'
 )
 
-textFontsButton.addEventListener('click', (event) => {
-  if (!textFontsBox.contains(event.target)) {
-    textFontsBox.classList.toggle('open')
-    textFontsIcon.classList.toggle('rotate')
-    headingFontsBox.classList.remove('open')
-    headingFontsIcon.classList.remove('rotate')
+textFontsButton?.addEventListener('click', (event) => {
+  if (!textFontsBox?.contains(event.target as Node)) {
+    textFontsBox?.classList.toggle('open')
+    textFontsIcon?.classList.toggle('rotate')
+    headingFontsBox?.classList.remove('open')
+    headingFontsIcon?.classList.remove('rotate')
   }
 })
 
 document.addEventListener('mousedown', (event) => {
   if (
-    !textFontsBox.contains(event.target) &&
+    !textFontsBox?.contains(event.target as Node) &&
     event.target !== textFontsButton
   ) {
-    textFontsBox.classList.remove('open')
-    textFontsIcon.classList.remove('rotate')
+    textFontsBox?.classList.remove('open')
+    textFontsIcon?.classList.remove('rotate')
   }
 })
 
@@ -2331,28 +2364,28 @@ const headingFontsIcon = document.querySelector<HTMLElement>(
   '.heading-fonts-buttn svg'
 )
 
-headingFontsButton.addEventListener('click', (event) => {
-  if (!headingFontsBox.contains(event.target)) {
-    headingFontsBox.classList.toggle('open')
-    headingFontsIcon.classList.toggle('rotate')
-    textFontsBox.classList.remove('open')
-    textFontsIcon.classList.remove('rotate')
+headingFontsButton?.addEventListener('click', (event) => {
+  if (!headingFontsBox?.contains(event.target as Node)) {
+    headingFontsBox?.classList.toggle('open')
+    headingFontsIcon?.classList.toggle('rotate')
+    textFontsBox?.classList.remove('open')
+    textFontsIcon?.classList.remove('rotate')
   }
 })
 
 document.addEventListener('mousedown', (event) => {
   if (
-    !headingFontsBox.contains(event.target) &&
+    !headingFontsBox?.contains(event.target as Node) &&
     event.target !== headingFontsButton
   ) {
-    headingFontsBox.classList.remove('open')
-    headingFontsIcon.classList.remove('rotate')
+    headingFontsBox?.classList.remove('open')
+    headingFontsIcon?.classList.remove('rotate')
   }
 })
 
 // contrast checker
 
-function getContrastRatio2(color1, color2) {
+function getContrastRatio2(color1: string, color2: string) {
   const luminance1 = getLuminance2(color1)
   const luminance2 = getLuminance2(color2)
 
@@ -2363,8 +2396,8 @@ function getContrastRatio2(color1, color2) {
   return contrastRatio2
 }
 
-function getLuminance2(color) {
-  const rgb = color.match(/\d+/g)
+function getLuminance2(color: string): number {
+  const rgb = color.match(/\d+/g) as RegExpMatchArray 
   const [r, g, b] = rgb.map(Number)
 
   const [red, green, blue] = [r / 255, g / 255, b / 255]
@@ -2376,14 +2409,14 @@ function getLuminance2(color) {
 
   return luminance
 }
-
-function adjustGamma(color) {
+// ADD
+function adjustGamma(color: number): number {
   return color <= 0.03928
     ? color / 12.92
     : Math.pow((color + 0.055) / 1.055, 2.4)
 }
 
-function updateContrastColor(variable, element) {
+function updateContrastColor(variable: string, element: HTMLElement) {
   const textColor = getComputedStyle(element).color
   const bgColor = getComputedStyle(element).backgroundColor
   const contrastRatio2 = getContrastRatio2(textColor, bgColor)
