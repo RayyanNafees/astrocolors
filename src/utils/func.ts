@@ -6,7 +6,7 @@
  */
 
 
-export const debounce = (func: any, wait: number): Function  => {
+export const debounce = (func: Function, wait: number): Function  => {
   let timeout: ReturnType<typeof setTimeout>
   return  (...args: any[]) => {
     const context=  this

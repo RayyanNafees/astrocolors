@@ -426,7 +426,7 @@ const bindSlInputEvents = (index: number) => {
 }
 
 for (let i = 0; i < hueRotationInputs.length; i++) {
-  const handleHueInput = (e: InputEvent): any => {
+  const handleHueInput = (e: Event): any => {
     const slInput = document.querySelectorAll<HTMLElement>('.sl-handle')[i]
     currentHue[i] = +(e.target as HTMLInputElement).value / 360
     hueUnderlays[i].setAttribute(
@@ -1794,7 +1794,7 @@ function getBrightness(color: string) {
 // }
 
 // DOUBT: May break
-export const debounce = (func: Function, wait: number): Function => {
+export const debounce = (func: Function, wait: number=100): EventListenerOrEventListenerObject => {
   let timeout: ReturnType<typeof setTimeout>
   return (...args: any[]) => {
     const context = this
@@ -1816,7 +1816,7 @@ const accentBox = document.querySelectorAll<HTMLElement>('.accent-color-box')
 function checkContrast() {
   const handleInput = (
     colorValue: string,
-    elements: NodeListOf<HTMLElement>
+    elements: HTMLElement[]
   ) => {
     const primaryColorValue = primaryColor.value
     const secondaryColorValue = secondaryColor.value
@@ -1848,7 +1848,7 @@ function checkContrast() {
  // FIXME
   primbuttnColor.addEventListener(
     'input',
-    debounce(() => {
+    debounce(function() {
       const primbuttnColorValue = primbuttnColor.value
       handleInput(primbuttnColorValue, [...primaryButtons, ...primaryBox])
     })
@@ -1856,7 +1856,7 @@ function checkContrast() {
 
   secbuttnColor.addEventListener(
     'input',
-    debounce(() => {
+    debounce(function() {
       const secbuttnColorValue = secbuttnColor.value
       handleInput(secbuttnColorValue, [
         ...faqQuestions,
@@ -1869,9 +1869,9 @@ function checkContrast() {
 
   accentColor.addEventListener(
     'input',
-    debounce(() => {
+    debounce(function() {
       const accentColorValue = accentColor.value
-      handleInput(accentColorValue, [...accentColorClass, ...accentBox])
+      handleInput(accentColorValue, [accentColorClass, ...accentBox])
     })
   )
 }
