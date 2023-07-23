@@ -20,7 +20,7 @@ const hueUnderlays = document.querySelectorAll('.color-underlay');
 
 // FAQ
 
-const faqQuestions = document.querySelectorAll(".faq");
+const faqQuestions = document.querySelectorAll<HTMLElement>(".faq");
 const faqAnswers = document.querySelectorAll(".faq-a");
 const faqIcons = document.querySelectorAll(".faq-icon");
 
@@ -249,7 +249,7 @@ for (var i = 0; i < fontTypeInputs.length; i++) {
 }
 
 
-
+export {faqQuestions};
 
 
 
