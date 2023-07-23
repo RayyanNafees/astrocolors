@@ -17,8 +17,8 @@ const secbuttnColorClass = document.querySelector<HTMLElement>(
 const accentColorClass = document.querySelector<HTMLElement>(
   '.accent'
 ) as HTMLElement
-const primColorClass = document.querySelector<HTMLElement>('.prim')
-const secColorClass = document.querySelector<HTMLElement>('.sec')
+const primColorClass = document.querySelector<HTMLElement>('.prim') as HTMLElement
+const secColorClass = document.querySelector<HTMLElement>('.sec') as HTMLElement
 const primaryColor = <HTMLInputElement>document.getElementById('prim')
 const secondaryColor = <HTMLInputElement>document.getElementById('sec')
 const primbuttnColor = <HTMLInputElement>document.getElementById('primbuttn')
@@ -515,17 +515,17 @@ function checkDarkOrLight() {
     const themeDiv = <HTMLElement>document.getElementById('theme')
     themeDiv.style.backgroundColor = isDarkMode ? 'black' : ''
 
-    const themeContainer = themeDiv.querySelectorAll('.darkorlight-cont')!
-    const themeWrapper = themeContainer.children[0]
+    const themeContainer = themeDiv.querySelectorAll<HTMLElement>('.darkorlight-cont')[0] // DOUBT: U added this 0 yourself
+    const themeWrapper = themeContainer.children[0] as HTMLElement
     themeWrapper.style.transform = 'translateY(-30px)'
   } else if (lightness < 50) {
     isDarkMode = true
-    const themeDiv = document.getElementById('theme')
+    const themeDiv = <HTMLElement>document.getElementById('theme')
     themeDiv.style.backgroundColor = isDarkMode ? 'black' : ''
 
     const themeContainer =
-      themeDiv.querySelector<HTMLElement>('.darkorlight-cont')
-    const themeWrapper = themeContainer.children[0]
+      themeDiv.querySelector<HTMLElement>('.darkorlight-cont') as HTMLElement
+    const themeWrapper = themeContainer.children[0] as HTMLElement
 
     if (isDarkMode) {
       themeWrapper.style.transform = 'translateY(0)'
@@ -587,7 +587,7 @@ randomizeButton?.addEventListener('click', () => {
   randomizeColors()
   updateSlug()
   attachColorPickerListeners(colorPickers, hexInputs)
-  closeSettingsOnClickOutside(event)
+  closeSettingsOnClickOutside(event as Event)
 })
 
 document.addEventListener('keydown', (event) => {
@@ -606,8 +606,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -652,8 +652,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -701,8 +701,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -748,8 +748,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -796,8 +796,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -845,8 +845,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -896,8 +896,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -945,8 +945,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -994,8 +994,8 @@ const colorSchemes = [
     baseHue: null,
     generateColors: function () {
       let baseHue
-      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue)) {
-        baseHue = hexToHue(this.baseHue)
+      if (typeof this.baseHue !== 'undefined' && isValidHex(this.baseHue! as string)) {
+        baseHue = hexToHue(this.baseHue! as string)
       } else {
         baseHue = Math.floor(Math.random() * 360)
       }
@@ -1053,9 +1053,10 @@ lockButtons.forEach((lockButton) => {
     lockButton
       ?.querySelector<HTMLElement>('.lock-closed')
       ?.classList.toggle('show')
+
     lockButton
       ?.querySelector<HTMLElement>('.lock-open')
-      .classList.toggle('show')
+      ?.classList.toggle('show')
   })
 })
 
@@ -1147,7 +1148,7 @@ accentLock?.addEventListener('click', function () {
 
   if (isAccentLocked) {
     const hue = accentColor.value.split(',')[0]
-    colorSchemes.forEach(function (scheme) {
+    colorSchemes.forEach(function (scheme: Scheme) {
       scheme.baseHue = hue
     })
   } else {
@@ -1844,7 +1845,7 @@ function checkContrast() {
       }
     })
   }
-
+ // FIXME
   primbuttnColor.addEventListener(
     'input',
     debounce(() => {
@@ -2092,7 +2093,7 @@ function updateSlug() {
 
 function applyColorsFromSlug(slug?: string) {
   const searchParams = new URLSearchParams(window.location.search)
-  slug = slug || searchParams.get('colors') as string
+  slug = slug || (searchParams.get('colors') as string)
 
   if (slug) {
     const decodedColors = slug
@@ -2198,8 +2199,8 @@ function addSlugToArray() {
   updateContrastColor('--primarycontrast', primbuttnColorClass)
   updateContrastColor('--secondarycontrast', secbuttnColorClass)
   updateContrastColor2('--accentcontrast', accentColorClass)
-  updateContrastColor('--textcontrast', primColorClass)
-  updateContrastColor('--bgcontrast', secColorClass)
+  updateContrastColor('--textcontrast', primColorClass as HTMLElement)
+  updateContrastColor('--bgcontrast', secColorClass as HTMLElement)
   generateCSSCodeAndCopy()
   generateTailwindCSSCodeAndCopy()
   generateSCSSCodeAndCopy()
@@ -2397,7 +2398,7 @@ function getContrastRatio2(color1: string, color2: string) {
 }
 
 function getLuminance2(color: string): number {
-  const rgb = color.match(/\d+/g) as RegExpMatchArray 
+  const rgb = color.match(/\d+/g) as RegExpMatchArray
   const [r, g, b] = rgb.map(Number)
 
   const [red, green, blue] = [r / 255, g / 255, b / 255]
@@ -2421,7 +2422,9 @@ function updateContrastColor(variable: string, element: HTMLElement) {
   const bgColor = getComputedStyle(element).backgroundColor
   const contrastRatio2 = getContrastRatio2(textColor, bgColor)
 
-  const tooltipSpan = element.querySelector<HTMLElement>('.contrast-tooltip')
+  const tooltipSpan = element.querySelector<HTMLElement>(
+    '.contrast-tooltip'
+  ) as HTMLElement
 
   let contrastText
 
@@ -2441,12 +2444,14 @@ function updateContrastColor(variable: string, element: HTMLElement) {
   )}:1 <br><span style="font-size: 10px; opacity: 60%;">Learn more</span>`
 }
 
-function updateContrastColor2(variable, element) {
+function updateContrastColor2(variable: string, element: HTMLElement) {
   const accentColor = getComputedStyle(accentColorClass).backgroundColor
   const bgColor = getComputedStyle(secbuttnColorClass).backgroundColor
   const contrastRatio2 = getContrastRatio2(accentColor, bgColor)
 
-  const tooltipSpan = element.querySelector<HTMLElement>('.contrast-tooltip')
+  const tooltipSpan = element.querySelector<HTMLElement>(
+    '.contrast-tooltip'
+  ) as HTMLElement
 
   let contrastText
 
@@ -2466,8 +2471,8 @@ function updateContrastColor2(variable, element) {
 updateContrastColor('--primarycontrast', primbuttnColorClass)
 updateContrastColor('--secondarycontrast', secbuttnColorClass)
 updateContrastColor2('--accentcontrast', accentColorClass)
-updateContrastColor('--textcontrast', primColorClass)
-updateContrastColor('--bgcontrast', secColorClass)
+updateContrastColor('--textcontrast', primColorClass as HTMLElement)
+updateContrastColor('--bgcontrast', secColorClass as HTMLElement)
 generateCSSCodeAndCopy()
 generateTailwindCSSCodeAndCopy()
 generateSCSSCodeAndCopy()
@@ -2477,8 +2482,8 @@ primaryColor.addEventListener('change', () => {
   updateContrastColor('--primarycontrast', primbuttnColorClass)
   updateContrastColor('--secondarycontrast', secbuttnColorClass)
   updateContrastColor2('--accentcontrast', accentColorClass)
-  updateContrastColor('--textcontrast', primColorClass)
-  updateContrastColor('--bgcontrast', secColorClass)
+  updateContrastColor('--textcontrast', primColorClass as HTMLElement)
+  updateContrastColor('--bgcontrast', secColorClass as HTMLElement)
   generateCSSCodeAndCopy()
   generateTailwindCSSCodeAndCopy()
   generateSCSSCodeAndCopy()
@@ -2489,8 +2494,8 @@ secondaryColor.addEventListener('change', () => {
   updateContrastColor('--primarycontrast', primbuttnColorClass)
   updateContrastColor('--secondarycontrast', secbuttnColorClass)
   updateContrastColor2('--accentcontrast', accentColorClass)
-  updateContrastColor('--textcontrast', primColorClass)
-  updateContrastColor('--bgcontrast', secColorClass)
+  updateContrastColor('--textcontrast', primColorClass as HTMLElement)
+  updateContrastColor('--bgcontrast', secColorClass as HTMLElement)
   generateCSSCodeAndCopy()
   generateTailwindCSSCodeAndCopy()
   generateSCSSCodeAndCopy()
@@ -2501,8 +2506,8 @@ primbuttnColor.addEventListener('change', () => {
   updateContrastColor('--primarycontrast', primbuttnColorClass)
   updateContrastColor('--secondarycontrast', secbuttnColorClass)
   updateContrastColor2('--accentcontrast', accentColorClass)
-  updateContrastColor('--textcontrast', primColorClass)
-  updateContrastColor('--bgcontrast', secColorClass)
+  updateContrastColor('--textcontrast', primColorClass as HTMLElement)
+  updateContrastColor('--bgcontrast', secColorClass as HTMLElement)
   generateCSSCodeAndCopy()
   generateTailwindCSSCodeAndCopy()
   generateSCSSCodeAndCopy()
@@ -2513,8 +2518,8 @@ secbuttnColor.addEventListener('change', () => {
   updateContrastColor('--primarycontrast', primbuttnColorClass)
   updateContrastColor('--secondarycontrast', secbuttnColorClass)
   updateContrastColor2('--accentcontrast', accentColorClass)
-  updateContrastColor('--textcontrast', primColorClass)
-  updateContrastColor('--bgcontrast', secColorClass)
+  updateContrastColor('--textcontrast', primColorClass as HTMLElement)
+  updateContrastColor('--bgcontrast', secColorClass as HTMLElement)
   generateCSSCodeAndCopy()
   generateTailwindCSSCodeAndCopy()
   generateSCSSCodeAndCopy()
@@ -2525,8 +2530,8 @@ accentColor.addEventListener('change', () => {
   updateContrastColor('--primarycontrast', primbuttnColorClass)
   updateContrastColor('--secondarycontrast', secbuttnColorClass)
   updateContrastColor2('--accentcontrast', accentColorClass)
-  updateContrastColor('--textcontrast', primColorClass)
-  updateContrastColor('--bgcontrast', secColorClass)
+  updateContrastColor('--textcontrast', primColorClass as HTMLElement)
+  updateContrastColor('--bgcontrast', secColorClass as HTMLElement)
   generateCSSCodeAndCopy()
   generateTailwindCSSCodeAndCopy()
   generateSCSSCodeAndCopy()
@@ -2535,20 +2540,20 @@ accentColor.addEventListener('change', () => {
 
 var input = document.getElementById('file-name-input')
 
-input.addEventListener('keydown', function (event) {
+input?.addEventListener('keydown', function (event) {
   if (event.code === 'Space') {
     event.stopPropagation()
     event.preventDefault()
   }
 })
 
-function hexToRgbCode(hex) {
+function hexToRgbCode(hex: string) {
   hex = hex.replace('#', '')
 
   if (hex.length === 3) {
     hex = hex
       .split('')
-      .map((char) => char + char)
+      .map((char: string) => char + char)
       .join('')
   }
 
@@ -2559,13 +2564,13 @@ function hexToRgbCode(hex) {
   return `rgb(${r}, ${g}, ${b})`
 }
 
-function hexToHslCode(hex) {
+function hexToHslCode(hex: string) {
   hex = hex.replace('#', '')
 
   if (hex.length === 3) {
     hex = hex
       .split('')
-      .map((char) => char + char)
+      .map((char: string) => char + char)
       .join('')
   }
 
@@ -2621,11 +2626,11 @@ fontTypeInputs.forEach(function (fontTypeInput) {
   })
 })
 
-function toggleSelectedType(button) {
+function toggleSelectedType(button: HTMLElement) {
   const codeTypeContainer = button.closest('.code-type-cont')
   const codeTypes =
-    codeTypeContainer.querySelectorAll<HTMLElement>('.code-type')
-  codeTypes.forEach((type) => {
+    codeTypeContainer?.querySelectorAll<HTMLElement>('.code-type')
+  codeTypes?.forEach((type: HTMLElement) => {
     type.classList.remove('selected-type')
   })
   button.classList.add('selected-type')
@@ -2642,11 +2647,17 @@ function generateCSSCodeAndCopy() {
 
   let cssCode = ''
 
-  const hexButton = document.querySelector<HTMLElement>('.css-hex')
-  const rgbButton = document.querySelector<HTMLElement>('.css-rgb')
-  const hslButton = document.querySelector<HTMLElement>('.css-hsl')
+  const hexButton = document.querySelector<HTMLElement>(
+    '.css-hex'
+  ) as HTMLElement
+  const rgbButton = document.querySelector<HTMLElement>(
+    '.css-rgb'
+  ) as HTMLElement
+  const hslButton = document.querySelector<HTMLElement>(
+    '.css-hsl'
+  ) as HTMLElement
 
-  hexButton.addEventListener('click', () => {
+  hexButton?.addEventListener('click', () => {
     cssCode = `--text: ${primaryColorValue};
 --background: ${secondaryColorValue};
 --primary: ${primbuttnColorValue};
@@ -2683,10 +2694,10 @@ function generateCSSCodeAndCopy() {
 --secondary: ${secbuttnColorValue};
 --accent: ${accentColorValue};`
   updateCSSCode(cssCode)
-  toggleSelectedType(hexButton)
+  toggleSelectedType(hexButton as HTMLElement)
 
   const copyButton = document.getElementById('copy-css')
-  copyButton.addEventListener('click', () => {
+  copyButton?.addEventListener('click', () => {
     navigator.clipboard.writeText(cssCode).then(() => {
       copyButton.textContent = 'Copied!'
       setTimeout(() => {
@@ -2695,8 +2706,9 @@ function generateCSSCodeAndCopy() {
     })
   })
 
-  function updateCSSCode(code) {
-    document.getElementById('css-code').textContent = code
+  function updateCSSCode(code: string) {
+    const css_code = document.getElementById('css-code') as HTMLElement
+    css_code.textContent = code
   }
 }
 
@@ -2711,11 +2723,11 @@ function generateTailwindCSSCodeAndCopy() {
 
   let tcssCode = ''
 
-  const hexButton = document.querySelector<HTMLElement>('.tcss-hex')
-  const rgbButton = document.querySelector<HTMLElement>('.tcss-rgb')
-  const hslButton = document.querySelector<HTMLElement>('.tcss-hsl')
+  const hexButton = document.querySelector<HTMLElement>('.tcss-hex') as HTMLElement
+  const rgbButton = document.querySelector<HTMLElement>('.tcss-rgb') as HTMLElement
+  const hslButton = document.querySelector<HTMLElement>('.tcss-hsl') as HTMLElement
 
-  hexButton.addEventListener('click', () => {
+  hexButton?.addEventListener('click', () => {
     tcssCode = `'text': '${primaryColorValue}',
 'background': '${secondaryColorValue}',
 'primary': '${primbuttnColorValue}',
@@ -2725,7 +2737,7 @@ function generateTailwindCSSCodeAndCopy() {
     toggleSelectedType(hexButton)
   })
 
-  rgbButton.addEventListener('click', () => {
+  rgbButton?.addEventListener('click', () => {
     tcssCode = `'text': '${hexToRgbCode(primaryColorValue)}',
 'background': '${hexToRgbCode(secondaryColorValue)}',
 'primary': '${hexToRgbCode(primbuttnColorValue)}',
@@ -2735,7 +2747,7 @@ function generateTailwindCSSCodeAndCopy() {
     toggleSelectedType(rgbButton)
   })
 
-  hslButton.addEventListener('click', () => {
+  hslButton?.addEventListener('click', () => {
     tcssCode = `'text': '${hexToHslCode(primaryColorValue)}',
 'background': '${hexToHslCode(secondaryColorValue)}',
 'primary': '${hexToHslCode(primbuttnColorValue)}',
@@ -2755,7 +2767,7 @@ function generateTailwindCSSCodeAndCopy() {
   toggleSelectedType(hexButton)
 
   const copyButton = document.getElementById('copy-tailwind')
-  copyButton.addEventListener('click', () => {
+  copyButton?.addEventListener('click', () => {
     navigator.clipboard.writeText(tcssCode).then(() => {
       copyButton.textContent = 'Copied!'
       setTimeout(() => {
@@ -2764,8 +2776,9 @@ function generateTailwindCSSCodeAndCopy() {
     })
   })
 
-  function updateCSSCode(code) {
-    document.getElementById('tailwind-code').textContent = code
+  function updateCSSCode(code: string) {
+    const tw_code = document.getElementById('tailwind-code') as HTMLElement
+    tw_code.textContent = code
   }
 }
 
@@ -2780,11 +2793,11 @@ function generateSCSSCodeAndCopy() {
 
   let scssCode = ''
 
-  const hexButton = document.querySelector<HTMLElement>('.scss-hex')
-  const rgbButton = document.querySelector<HTMLElement>('.scss-rgb')
-  const hslButton = document.querySelector<HTMLElement>('.scss-hsl')
-
-  hexButton.addEventListener('click', () => {
+  const hexButton = document.querySelector<HTMLElement>('.scss-hex') as HTMLElement
+  const rgbButton = document.querySelector<HTMLElement>('.scss-rgb') as HTMLElement
+  const hslButton = document.querySelector<HTMLElement>('.scss-hsl') as HTMLElement
+ 
+  hexButton?.addEventListener('click', () => {
     scssCode = `$text: ${primaryColorValue};
 $background: ${secondaryColorValue};
 $primary: ${primbuttnColorValue};
@@ -2794,7 +2807,7 @@ $accent: ${accentColorValue};`
     toggleSelectedType(hexButton)
   })
 
-  rgbButton.addEventListener('click', () => {
+  rgbButton?.addEventListener('click', () => {
     scssCode = `$text: ${hexToRgbCode(primaryColorValue)};
 $background: ${hexToRgbCode(secondaryColorValue)};
 $primary: ${hexToRgbCode(primbuttnColorValue)};
@@ -2804,7 +2817,7 @@ $accent: ${hexToRgbCode(accentColorValue)};`
     toggleSelectedType(rgbButton)
   })
 
-  hslButton.addEventListener('click', () => {
+  hslButton?.addEventListener('click', () => {
     scssCode = `$text: ${hexToHslCode(primaryColorValue)};
 $background: ${hexToHslCode(secondaryColorValue)};
 $primary: ${hexToHslCode(primbuttnColorValue)};
@@ -2824,7 +2837,7 @@ $accent: ${accentColorValue};`
   toggleSelectedType(hexButton)
 
   const copyButton = document.getElementById('copy-scss')
-  copyButton.addEventListener('click', () => {
+  copyButton?.addEventListener('click', () => {
     navigator.clipboard.writeText(scssCode).then(() => {
       copyButton.textContent = 'Copied!'
       setTimeout(() => {
@@ -2833,8 +2846,9 @@ $accent: ${accentColorValue};`
     })
   })
 
-  function updateCSSCode(code) {
-    document.getElementById('scss-code').textContent = code
+  function updateCSSCode(code: string) {
+    const scss_code = document.getElementById('scss-code') as HTMLElement
+    scss_code.textContent = code
   }
 }
 
@@ -2864,14 +2878,20 @@ function generateCSVCodeAndCopy() {
   }
 
   csvCodeWithoutHash = csvCodeWithoutHash.slice(0, -1)
-  csvCodeWithHash = csvCodeWithHash.slice(0, -1)
+  csvCodeWithHash = csvCodeWithHash?.slice(0, -1)
 
-  document.getElementById('csv-code-without-hash').textContent =
-    csvCodeWithoutHash
-  document.getElementById('csv-code-with-hash').textContent = csvCodeWithHash
+  const csv_code = document.getElementById(
+    'csv-code-without-hash'
+  ) as HTMLElement
+  csv_code.textContent = csvCodeWithoutHash
+
+  const csv_code_$ = document.getElementById(
+    'csv-code-with-hash'
+  ) as HTMLElement
+  csv_code_$.textContent = csvCodeWithHash
 
   const copyButtonWithoutHash = document.getElementById('copy-csv-without-hash')
-  copyButtonWithoutHash.addEventListener('click', () => {
+  copyButtonWithoutHash?.addEventListener('click', () => {
     navigator.clipboard.writeText(csvCodeWithoutHash).then(() => {
       copyButtonWithoutHash.textContent = 'Copied!'
       setTimeout(() => {
@@ -2881,7 +2901,7 @@ function generateCSVCodeAndCopy() {
   })
 
   const copyButtonWithHash = document.getElementById('copy-csv-with-hash')
-  copyButtonWithHash.addEventListener('click', () => {
+  copyButtonWithHash?.addEventListener('click', () => {
     navigator.clipboard.writeText(csvCodeWithHash).then(() => {
       copyButtonWithHash.textContent = 'Copied!'
       setTimeout(() => {
@@ -2904,14 +2924,14 @@ const randomizeOptionsButton = document.querySelector<HTMLElement>(
 
 const isOpenSettings = new Array(colorLabels.length).fill(false)
 
-randomizeOptionsButton.addEventListener('click', () => {
-  randomizeSettings.classList.toggle('open-settings')
+randomizeOptionsButton?.addEventListener('click', () => {
+  randomizeSettings?.classList.toggle('open-settings')
 })
 
 document.addEventListener('click', (event) => {
-  const isClickInside = randomizeSettings.contains(event.target)
+  const isClickInside = randomizeSettings?.contains(event.target as Node)
   if (!isClickInside) {
-    randomizeSettings.classList.remove('open-settings')
+    randomizeSettings?.classList.remove('open-settings')
   }
 })
 
@@ -2927,21 +2947,21 @@ document.addEventListener('click', (event) => {
 
 // });
 
-function closeColorSettings(index) {
+function closeColorSettings(index: number) {
   colorSettings[index].classList.remove('open-settings')
   isOpenSettings[index] = false
 }
 
-function openColorSettings(index) {
+function openColorSettings(index: number) {
   colorSettings[index].classList.add('open-settings')
   isOpenSettings[index] = true
   updateSlug()
 }
 
-function closeSettingsOnClickOutside(event) {
-  const isClickedInsideSettings = Array.from(event.target.classList).some(
-    (className) => className.startsWith('color-settings')
-  )
+function closeSettingsOnClickOutside(event: Event) {
+  const isClickedInsideSettings = Array.from(
+    (event.target as HTMLElement).classList
+  ).some((className: string) => className?.startsWith('color-settings'))
 
   if (!isClickedInsideSettings) {
     colorSettings.forEach((settings, index) => {
@@ -2988,11 +3008,11 @@ const copyIcons = document.querySelectorAll<HTMLElement>('.copy-icon')
 
 copyIcons.forEach(function (copyIcon) {
   const hexInput =
-    copyIcon.parentElement.querySelector<HTMLElement>('.hex-input')
+    copyIcon.parentElement?.querySelector<HTMLInputElement>('.hex-input')
   const originalHTML = copyIcon.innerHTML
 
   copyIcon.addEventListener('click', function () {
-    const inputText = hexInput.value
+    const inputText = hexInput?.value as string
     navigator.clipboard.writeText(inputText)
 
     copyIcon.innerHTML = `
@@ -3020,7 +3040,7 @@ function toggleTheme() {
 
   isToggling = true
 
-  const themeDiv = document.getElementById('theme')
+  const themeDiv = document.getElementById('theme') as HTMLElement
 
   const targetDivIds = [
     'randomize',
@@ -3035,7 +3055,7 @@ function toggleTheme() {
     'accent-cont',
   ]
 
-  const overlays = []
+  const overlays: HTMLElement[] = []
 
   const blockedKeys = [
     'ArrowRight',
@@ -3048,7 +3068,7 @@ function toggleTheme() {
     's',
   ]
 
-  const keydownListener = (event) => {
+  const keydownListener = (event: KeyboardEvent) => {
     if (blockedKeys.includes(event.key)) {
       event.preventDefault()
       event.stopPropagation()
@@ -3065,7 +3085,7 @@ function toggleTheme() {
     document.removeEventListener('keydown', keydownListener, true)
   }
 
-  const createOverlay = (parentDiv) => {
+  const createOverlay = (parentDiv: HTMLElement) => {
     const overlay = document.createElement('div')
     overlay.className = 'overlay'
     parentDiv.appendChild(overlay)
@@ -3075,12 +3095,17 @@ function toggleTheme() {
 
   const removeOverlays = () => {
     overlays.forEach((overlay) => {
-      overlay.parentNode.removeChild(overlay)
+      overlay?.parentNode?.removeChild(overlay)
     })
     overlays.length = 0
   }
 
-  const animateOverlayHeight = (overlay, startTime, duration, targetDiv) => {
+  const animateOverlayHeight = (
+    overlay: HTMLElement,
+    startTime: number,
+    duration: number,
+    targetDiv: HTMLElement
+  ) => {
     const decreaseHeight = () => {
       const currentTime = Date.now()
       const elapsed = currentTime - startTime
@@ -3095,7 +3120,7 @@ function toggleTheme() {
     requestAnimationFrame(decreaseHeight)
   }
 
-  const toggleOverlay = (parentDiv, isThemeDiv) => {
+  const toggleOverlay = (parentDiv: HTMLElement, isThemeDiv: boolean) => {
     const overlay = createOverlay(parentDiv)
     overlay.style.position = 'absolute'
     overlay.style.bottom = '0'
@@ -3124,7 +3149,7 @@ function toggleTheme() {
   toggleOverlay(themeDiv, true)
 
   targetDivIds.forEach((divId) => {
-    const targetDiv = document.getElementById(divId)
+    const targetDiv = document.getElementById(divId) as HTMLElement
     toggleOverlay(targetDiv, false)
   })
 
@@ -3134,7 +3159,7 @@ function toggleTheme() {
 
     const themeContainer =
       themeDiv.querySelector<HTMLElement>('.darkorlight-cont')
-    const themeWrapper = themeContainer.children[0]
+    const themeWrapper = themeContainer?.children[0] as HTMLElement
     themeWrapper.style.transform = isDarkMode
       ? 'translateY(0)'
       : 'translateY(-30px)'
@@ -3180,7 +3205,7 @@ function toggleTheme() {
       const newURL = `${window.location.origin}${
         window.location.pathname
       }?${urlParams.toString()}`
-      window.history.replaceState(null, null, newURL)
+      window.history.replaceState(null, '', newURL)
     }
 
     applyColorsFromSlug()
@@ -3202,15 +3227,19 @@ function toggleTheme() {
 document.addEventListener('keydown', function (event) {
   if ((event.ctrlKey || event.metaKey) && event.key === 'q') {
     event.preventDefault()
-    document.getElementById('theme').click()
+    document.getElementById('theme')?.click()
   }
 })
 
-function getRandomLightness(min, max) {
+function getRandomLightness(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function setLightness(hexColor, minLightness, maxLightness) {
+function setLightness(
+  hexColor: string,
+  minLightness: number,
+  maxLightness: number
+) {
   const hslColor = hexToHsl(hexColor)
   const updatedColor = setHslLightness(
     hslColor,
@@ -3219,13 +3248,13 @@ function setLightness(hexColor, minLightness, maxLightness) {
   return updatedColor
 }
 
-function setHslLightness(hslColor, lightness) {
+function setHslLightness(hslColor: HSL, lightness: number) {
   const { h, s, l } = hslColor
 
   return hslToHex(h, s, lightness)
 }
 
-function hexToHsl(hexColor) {
+function hexToHsl(hexColor: string) {
   // Convert hex to RGB first
   let r = 0,
     g = 0,
