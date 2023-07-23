@@ -19,6 +19,9 @@ dependencies:
     version: 1.5.3
 
 devDependencies:
+  '@types/qrcode':
+    specifier: ^1.5.1
+    version: 1.5.1
   unocss:
     specifier: ^0.53.5
     version: 0.53.5(postcss@8.4.26)(vite@4.4.4)
@@ -899,9 +902,19 @@ packages:
       '@types/unist': 2.0.7
     dev: false
 
+  /@types/node@20.4.4:
+    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
+    dev: true
+
   /@types/parse5@6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
     dev: false
+
+  /@types/qrcode@1.5.1:
+    resolution: {integrity: sha512-HpSN675K0PmxIDRpjMI3Mc2GiKo3dNu+X/F5SoItiaDS1lVfgC6Wac1c5lQDfKWbTJUSHWiHKzpJpBZG7k9gaA==}
+    dependencies:
+      '@types/node': 20.4.4
+    dev: true
 
   /@types/resolve@1.20.2:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}

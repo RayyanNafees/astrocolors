@@ -16,6 +16,7 @@
     "qrcode": "^1.5.3"
   },
   "devDependencies": {
+    "@types/qrcode": "^1.5.1",
     "unocss": "^0.53.5"
   }
 }

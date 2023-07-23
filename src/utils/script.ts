@@ -1,30 +1,32 @@
 import QRcode from 'qrcode'
 
-const primaryButtons = document.querySelectorAll('.primary-button')
-const secondaryButtons = document.querySelectorAll('.secondary-button')
-const partTwo = document.querySelectorAll('.part2')
-const primbuttnColorClass = document.querySelector('.primbuttn')
-const secbuttnColorClass = document.querySelector('.secbuttn')
-const accentColorClass = document.querySelector('.accent')
-const primColorClass = document.querySelector('.prim')
-const secColorClass = document.querySelector('.sec')
-const primaryColor = document.getElementById('prim')
-const secondaryColor = document.getElementById('sec')
-const primbuttnColor = document.getElementById('primbuttn')
-const secbuttnColor = document.getElementById('secbuttn')
-const accentColor = document.getElementById('accent')
+const primaryButtons = document.querySelectorAll<HTMLElement>('.primary-button')
+const secondaryButtons =
+  document.querySelectorAll<HTMLElement>('.secondary-button')
+const partTwo = document.querySelectorAll<HTMLElement>('.part2')
+const primbuttnColorClass = document.querySelector<HTMLElement>('.primbuttn')
+const secbuttnColorClass = document.querySelector<HTMLElement>('.secbuttn')
+const accentColorClass = document.querySelector<HTMLElement>('.accent')
+const primColorClass = document.querySelector<HTMLElement>('.prim')
+const secColorClass = document.querySelector<HTMLElement>('.sec')
+const primaryColor = <HTMLInputElement>document.getElementById('prim')
+const secondaryColor = <HTMLInputElement>document.getElementById('sec')
+const primbuttnColor = <HTMLInputElement>document.getElementById('primbuttn')
+const secbuttnColor = <HTMLInputElement>document.getElementById('secbuttn')
+const accentColor = <HTMLInputElement>document.getElementById('accent')
 const randomizeButton = document.getElementById('randomize')
-const colorPickers = document.querySelectorAll('.colorpicker')
-const hexInputs = document.querySelectorAll('.hex-input')
-const hueRotationInputs = document.querySelectorAll('.hue-rotation')
-const hueUnderlays = document.querySelectorAll('.color-underlay')
+const colorPickers = document.querySelectorAll<HTMLInputElement>('.colorpicker')
+const hexInputs = document.querySelectorAll<HTMLInputElement>('.hex-input')
+const hueRotationInputs =
+  document.querySelectorAll<HTMLInputElement>('.hue-rotation')
+const hueUnderlays = document.querySelectorAll<HTMLElement>('.color-underlay')
 
-const rgbToHex = (r, g, b) => {
+const rgbToHex = (r: number, g: number, b: number): string => {
   return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
 }
 
-const hsvToRgb = (h, s, v) => {
-  let r, g, b
+const hsvToRgb = (h: number, s: number, v: number): number[] => {
+  let r!: number, g!: number, b!: number
 
   let i = Math.floor(h * 6)
   let f = h * 6 - i
@@ -55,8 +57,25 @@ const hsvToRgb = (h, s, v) => {
 
   return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)]
 }
+interface RGB {
+  r: number
+  g: number
+  b: number
+}
 
-function hexToRgb2(hex) {
+interface HSV {
+  h: number
+  s: number
+  v: number
+}
+
+interface HSL {
+  h: number
+  s:number
+  l: number
+}
+
+function hexToRgb2(hex: string): RGB {
   const bigint = parseInt(hex.substring(1), 16)
   const r = (bigint >> 16) & 255
   const g = (bigint >> 8) & 255
@@ -64,16 +83,16 @@ function hexToRgb2(hex) {
   return { r, g, b }
 }
 
-function rgbToHsv(r, g, b) {
+function rgbToHsv(r: number, g: number, b: number): HSV {
   r /= 255
   g /= 255
   b /= 255
 
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
-  let h,
-    s,
-    v = max
+  let h: number = 0, // Added =0 yourself, can cause issues
+    s: number,
+    v: number = max
 
   const d = max - min
   s = max === 0 ? 0 : d / max
@@ -102,13 +121,13 @@ function rgbToHsv(r, g, b) {
   }
 }
 
-function hslToRgb(h, s, l) {
-  let r, g, b
+function hslToRgb(h: number, s: number, l: number): RGB {
+  let r, g, b: number
 
   if (s === 0) {
     r = g = b = l
   } else {
-    const hue2rgb = (p, q, t) => {
+    const hue2rgb = (p: number, q: number, t: number): number => {
       if (t < 0) t += 1
       if (t > 1) t -= 1
       if (t < 1 / 6) return p + (q - p) * 6 * t
@@ -139,9 +158,9 @@ window.addEventListener('load', () => {
 
 function updateLinks() {
   const slug = currentSlug
-  const links = document.querySelectorAll('a:not([href^="#"])')
+  const links = document.querySelectorAll<HTMLElement>('a:not([href^="#"])')
   links.forEach((link) => {
-    const href = link.getAttribute('href')
+    const href = link.getAttribute('href')!
     const classes = link.getAttribute('class')
 
     if (classes && classes.includes('inbound')) {
@@ -182,11 +201,11 @@ updateLinks()
 
 const PICKER_HEIGHT = 200
 const PICKER_WIDTH = 200
-let currentHue = []
-let currentSaturation = []
-let currentValue = []
+let currentHue: number[] = []
+let currentSaturation: number[] = []
+let currentValue: number[] = []
 
-const getCurrentColor = (index) => {
+const getCurrentColor = (index: number): number[] => {
   return hsvToRgb(
     currentHue[index],
     currentSaturation[index],
@@ -194,7 +213,10 @@ const getCurrentColor = (index) => {
   )
 }
 
-function attachColorPickerListeners(colorPickers, hexInputs) {
+function attachColorPickerListeners(
+  colorPickers: NodeListOf<HTMLInputElement>,
+  hexInputs: NodeListOf<HTMLInputElement>
+) {
   const updateColorPickers = () => {
     for (let i = 0; i < colorPickers.length; i++) {
       const hexValue = hexInputs[i].value
@@ -208,15 +230,16 @@ function attachColorPickerListeners(colorPickers, hexInputs) {
       currentSaturation[i] = saturation
       currentValue[i] = value
 
-      hueRotationInputs[i].value = hue * 360
+      hueRotationInputs[i].value = String(hue * 360)
       hueUnderlays[i].style.background = `hsl(${hue * 360}, 100%, 50%)`
 
-      const selectedColor = document.querySelectorAll('.selected-color')[i]
+      const selectedColor =
+        document.querySelectorAll<HTMLElement>('.selected-color')[i]
       selectedColor.style.backgroundColor = hexValue
 
-      const slHandle = document.querySelectorAll('.sl-handle')[i]
+      const slHandle = document.querySelectorAll<HTMLElement>('.sl-handle')[i]
       const pickerRect = document
-        .querySelectorAll('.sat-lightness-picker')
+        .querySelectorAll<HTMLElement>('.sat-lightness-picker')
         [i].getBoundingClientRect()
       const xPos = saturation * PICKER_WIDTH
       const yPos = (1 - value) * PICKER_HEIGHT
@@ -224,7 +247,7 @@ function attachColorPickerListeners(colorPickers, hexInputs) {
       const inputEvent = new Event('input', { bubbles: true })
       slHandle.dispatchEvent(inputEvent)
 
-      const slInput = document.querySelectorAll('.sl-handle')[i]
+      const slInput = document.querySelectorAll<HTMLElement>('.sl-handle')[i]
       slInput.style.backgroundColor = `rgb(${getCurrentColor(i)})`
     }
   }
@@ -267,10 +290,10 @@ function attachColorPickerListeners(colorPickers, hexInputs) {
           const colorValue = hexInputs[index].value
           updateUrlParams()
         } else {
-          this.value = this.dataset.previousValue
+          this.value = this.dataset.previousValue!
         }
       } else {
-        this.value = this.dataset.previousValue
+        this.value = this.dataset.previousValue!
       }
     })
 
@@ -306,11 +329,12 @@ function updateUrlParams() {
   window.history.replaceState({}, document.title, `?colors=${defaultSlug}`)
 }
 
-const updateColor = (index) => {
-  const hexInputs = document.querySelectorAll('.hex-input')
-  const colorPickers = document.querySelectorAll('.colorpicker')
+const updateColor = (index: number) => {
+  const hexInputs = document.querySelectorAll<HTMLInputElement>('.hex-input')
+  const colorPickers = document.querySelectorAll<HTMLInputElement>('.colorpicker')
 
-  const selectedColor = document.querySelectorAll('.selected-color')[index]
+  const selectedColor =
+    document.querySelectorAll<HTMLElement>('.selected-color')[index]
   const hexInput = hexInputs[index]
   const colorPickerInput = colorPickers[index]
 
@@ -320,7 +344,8 @@ const updateColor = (index) => {
   )
 
   const currentColor = getCurrentColor(index)
-  const calculatedHexValue = rgbToHex(...currentColor)
+  const [r,g,b] = currentColor;
+  const calculatedHexValue = rgbToHex(r,g,b)
 
   if (
     hexInput.value !== calculatedHexValue &&
@@ -332,11 +357,13 @@ const updateColor = (index) => {
   }
 }
 
-const bindSlInputEvents = (index) => {
-  const slInput = document.querySelectorAll('.sl-handle')[index]
-  const slPicker = document.querySelectorAll('.sat-lightness-picker')[index]
+const bindSlInputEvents = (index: number) => {
+  const slInput = document.querySelectorAll<HTMLElement>('.sl-handle')[index]
+  const slPicker = document.querySelectorAll<HTMLElement>(
+    '.sat-lightness-picker'
+  )[index]
 
-  const setSlPosition = (xPos, yPos) => {
+  const setSlPosition = (xPos: number, yPos:number) => {
     const pickerRect = slPicker.getBoundingClientRect()
     const offsetX = pickerRect.left + window.scrollX
     const offsetY = pickerRect.top + window.scrollY
@@ -366,14 +393,14 @@ const bindSlInputEvents = (index) => {
     updateColor(index)
   }
 
-  const handleSlMouseDown = (e) => {
+  const handleSlMouseDown = (e:MouseEvent) => {
     e.preventDefault()
     document.addEventListener('mousemove', handleSlMouseMove)
     document.addEventListener('mouseup', handleSlMouseUp)
     setSlPosition(e.pageX, e.pageY)
   }
 
-  const handleSlMouseMove = (e) => {
+  const handleSlMouseMove = (e:MouseEvent) => {
     e.preventDefault()
     setSlPosition(e.pageX, e.pageY)
   }
@@ -388,9 +415,9 @@ const bindSlInputEvents = (index) => {
 }
 
 for (let i = 0; i < hueRotationInputs.length; i++) {
-  const handleHueInput = (e) => {
-    const slInput = document.querySelectorAll('.sl-handle')[i]
-    currentHue[i] = e.target.value / 360
+  const handleHueInput = (e: InputEvent): any => {
+    const slInput = document.querySelectorAll<HTMLElement>('.sl-handle')[i]
+    currentHue[i] = +(e.target as HTMLInputElement).value / 360
     hueUnderlays[i].setAttribute(
       'style',
       `background: rgb(${hsvToRgb(currentHue[i], 1, 1)})`
@@ -403,13 +430,14 @@ for (let i = 0; i < hueRotationInputs.length; i++) {
   bindSlInputEvents(i)
 }
 
-const themeButton = document.getElementById('theme')
+const themeButton = document.getElementById('theme')!
 themeButton.addEventListener('click', toggleTheme)
 
 let lastSelectedColorSet = null
 let isDarkMode = false
 
-function calculateLightness(hexColor) {
+//* DONE
+function calculateLightness(hexColor:string): number {
   const hslColor = hexToHSL(hexColor)
 
   const lightness = hslColor.l
@@ -417,7 +445,7 @@ function calculateLightness(hexColor) {
   return lightness * 100
 }
 
-function hexToHSL(hexColor) {
+function hexToHSL(hexColor: string): HSL {
   let r, g, b
 
   if (hexColor.length === 3) {
@@ -434,7 +462,7 @@ function hexToHSL(hexColor) {
 
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
-  let h, s, l
+  let h!:number, s, l
 
   l = (max + min) / 2
 
@@ -464,7 +492,7 @@ function hexToHSL(hexColor) {
 
 function checkDarkOrLight() {
   const searchParams = new URLSearchParams(window.location.search)
-  const colorsParam = searchParams.get('colors')
+  const colorsParam = searchParams.get('colors')!
 
   const colors = colorsParam.split('-')
   const secondColor = colors[1]
@@ -473,10 +501,11 @@ function checkDarkOrLight() {
 
   if (lightness > 50) {
     isDarkMode = false
-    const themeDiv = document.getElementById('theme')
+    const themeDiv = <HTMLElement>document.getElementById('theme')
     themeDiv.style.backgroundColor = isDarkMode ? 'black' : ''
 
-    const themeContainer = themeDiv.querySelector('.darkorlight-cont')
+    const themeContainer =
+      themeDiv.querySelectorAll('.darkorlight-cont')!
     const themeWrapper = themeContainer.children[0]
     themeWrapper.style.transform = 'translateY(-30px)'
   } else if (lightness < 50) {
@@ -484,7 +513,8 @@ function checkDarkOrLight() {
     const themeDiv = document.getElementById('theme')
     themeDiv.style.backgroundColor = isDarkMode ? 'black' : ''
 
-    const themeContainer = themeDiv.querySelector('.darkorlight-cont')
+    const themeContainer =
+      themeDiv.querySelector<HTMLElement>('.darkorlight-cont')
     const themeWrapper = themeContainer.children[0]
 
     if (isDarkMode) {
@@ -495,39 +525,40 @@ function checkDarkOrLight() {
   }
 }
 
-function generateQRCode() {
-  var currentUrl = window.location.href
+// function generateQRCode() {
+//   var currentUrl = window.location.href
 
-  var qrcodeElement = document.getElementById('qrcode')
-  while (qrcodeElement.firstChild) {
-    qrcodeElement.removeChild(qrcodeElement.firstChild)
-  }
+//   var qrcodeElement = <HTMLElement>document.getElementById('qrcode')
+//   while (qrcodeElement.firstChild) {
+//     qrcodeElement.removeChild(qrcodeElement.firstChild)
+//   }
 
-  return new QRCode(qrcodeElement, {
-    text: currentUrl,
-    width: 250,
-    height: 250,
-  })
-}
+//   return new QRCode(qrcodeElement, {
+//     text: currentUrl,
+//     width: 250,
+//     height: 250,
+//   })
+// }
 function generateQRCode2() {
   var currentUrl = window.location.href
 
-  return QRcode.toDataURL(currentUrl, {width:250})
+  return QRcode.toDataURL(currentUrl, { width: 250 })
     .then((url) => {
       alert(url.length)
-      var img = document.querySelector('div#qrcode>image')
+      var img = document.querySelector<HTMLImageElement>('div#qrcode>image')!
       img.src = url
     })
-    .catch(console.err)
+    .catch(console.error)
 }
 
 hexInputs.forEach((hexInput) => {
   hexInput.addEventListener('input', handleHexInputChange)
 })
 
-function handleHexInputChange(event) {
-  const hexValue = event.target.value
-  const parentOption = event.target.closest('.colors-option')
+function handleHexInputChange(event:Event): any {
+  const target = event.target! as HTMLInputElement
+  const hexValue = target.value
+  const parentOption =target.closest('.colors-option')!
 
   if (parentOption.classList.contains('prim')) {
     primaryColor.value = hexValue
@@ -542,7 +573,7 @@ function handleHexInputChange(event) {
   }
 }
 
-randomizeButton.addEventListener('click', () => {
+randomizeButton?.addEventListener('click', () => {
   randomizeColors()
   updateSlug()
   attachColorPickerListeners(colorPickers, hexInputs)
@@ -1003,12 +1034,14 @@ const secbuttnLock = document.getElementById('secbuttn-lock')
 const accentLock = document.getElementById('accent-lock')
 
 // lock open / close
-const lockButtons = document.querySelectorAll('.lock-button')
+const lockButtons = Array.from(document.querySelectorAll<HTMLElement>('.lock-button'))!
 
 lockButtons.forEach((lockButton) => {
-  lockButton.addEventListener('click', () => {
-    lockButton.querySelector('.lock-closed').classList.toggle('show')
-    lockButton.querySelector('.lock-open').classList.toggle('show')
+  lockButton?.addEventListener('click', () => {
+    lockButton
+      ?.querySelector<HTMLElement>('.lock-closed')
+      ?.classList.toggle('show')
+    lockButton?.querySelector<HTMLElement>('.lock-open').classList.toggle('show')
   })
 })
 
@@ -1018,17 +1051,21 @@ let isPrimbuttnLocked = false
 let isSecbuttnLocked = false
 let isAccentLocked = false
 
-primaryLock.addEventListener('click', function () {
+interface Scheme{
+  baseHue:null|string
+}
+
+primaryLock?.addEventListener('click', function () {
   primaryLock.classList.toggle('locked')
   isPrimaryLocked = !isPrimaryLocked
 
   if (isPrimaryLocked) {
     const hue = primaryColor.value.split(',')[0]
-    colorSchemes.forEach(function (scheme) {
+    colorSchemes.forEach(function (scheme: Scheme) {
       scheme.baseHue = hue
     })
   } else {
-    colorSchemes.forEach(function (scheme) {
+    colorSchemes.forEach(function (scheme: Scheme) {
       scheme.baseHue = null
     })
   }
@@ -1036,13 +1073,13 @@ primaryLock.addEventListener('click', function () {
   updateLockButtons()
 })
 
-secondaryLock.addEventListener('click', function () {
+secondaryLock?.addEventListener('click', function () {
   secondaryLock.classList.toggle('locked')
   isSecondaryLocked = !isSecondaryLocked
 
   if (isSecondaryLocked) {
     const hue = secondaryColor.value.split(',')[0]
-    colorSchemes.forEach(function (scheme) {
+    colorSchemes.forEach(function (scheme: Scheme) {
       scheme.baseHue = hue
     })
   } else {
@@ -1054,13 +1091,13 @@ secondaryLock.addEventListener('click', function () {
   updateLockButtons()
 })
 
-primbuttnLock.addEventListener('click', function () {
+primbuttnLock?.addEventListener('click', function () {
   primbuttnLock.classList.toggle('locked')
   isPrimbuttnLocked = !isPrimbuttnLocked
 
   if (isPrimbuttnLocked) {
     const hue = primbuttnColor.value.split(',')[0]
-    colorSchemes.forEach(function (scheme) {
+    colorSchemes.forEach(function (scheme: Scheme) {
       scheme.baseHue = hue
     })
   } else {
@@ -1072,13 +1109,13 @@ primbuttnLock.addEventListener('click', function () {
   updateLockButtons()
 })
 
-secbuttnLock.addEventListener('click', function () {
+secbuttnLock?.addEventListener('click', function () {
   secbuttnLock.classList.toggle('locked')
   isSecbuttnLocked = !isSecbuttnLocked
 
   if (isSecbuttnLocked) {
     const hue = secbuttnColor.value.split(',')[0]
-    colorSchemes.forEach(function (scheme) {
+    colorSchemes.forEach(function (scheme: Scheme) {
       scheme.baseHue = hue
     })
   } else {
@@ -1090,7 +1127,7 @@ secbuttnLock.addEventListener('click', function () {
   updateLockButtons()
 })
 
-accentLock.addEventListener('click', function () {
+accentLock?.addEventListener('click', function () {
   accentLock.classList.toggle('locked')
   isAccentLocked = !isAccentLocked
 
@@ -1109,8 +1146,8 @@ accentLock.addEventListener('click', function () {
 })
 
 function updateLockButtons() {
-  const lockButtons = document.querySelectorAll('.lock-button')
-  const lockedCount = document.querySelectorAll('.locked').length
+  const lockButtons = document.querySelectorAll<HTMLElement>('.lock-button')
+  const lockedCount = document.querySelectorAll<HTMLElement>('.locked').length
 
   if (lockedCount >= 4) {
     lockButtons.forEach((button) => {
@@ -1125,12 +1162,12 @@ function updateLockButtons() {
   }
 }
 
-function isValidHex(hex) {
+function isValidHex(hex: string) {
   const regex = /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i
   return regex.test(hex)
 }
 
-function hexToHue(hex) {
+function hexToHue(hex: string) {
   let color = hex
   if (color.startsWith('#')) {
     color = color.slice(1)
@@ -1149,7 +1186,7 @@ function hexToHue(hex) {
   return Math.round(hsl[0])
 }
 
-function rgbToHsl(r, g, b) {
+function rgbToHsl(r: number, g:number, b:number): number[] {
   r /= 255
   g /= 255
   b /= 255
@@ -1191,14 +1228,15 @@ function rgbToHsl(r, g, b) {
 
 let selectedScheme = 'all'
 
-const colorSchemeOptions = document.querySelectorAll('.scheme-option')
+const colorSchemeOptions =
+  document.querySelectorAll<HTMLElement>('.scheme-option')
 colorSchemeOptions.forEach((option) => {
   option.addEventListener('click', () => {
     colorSchemeOptions.forEach((option) => {
       option.classList.remove('selected-scheme')
     })
 
-    selectedScheme = option.getAttribute('data-scheme')
+    selectedScheme = option.getAttribute('data-scheme')!
     option.classList.add('selected-scheme')
   })
 })
@@ -1216,52 +1254,52 @@ function randomizeColors() {
     )
   }
 
-  const colors = randomColorScheme.generateColors()
+  const colors = randomColorScheme?.generateColors()
 
-  const hexColors = colors.map((color) => {
-    const [h, s, l] = color.match(/\d+/g)
+  const hexColors = colors?.map((color) => {
+    const [h, s, l] = color.match(/\d+/g) as string[]
     return hslToHex(parseInt(h), parseInt(s), parseInt(l))
   })
 
   const searchParams = new URLSearchParams(window.location.search)
   const colorsParam = searchParams.get('colors')
 
-  const colorHex = colorsParam.split('-')
-  const lockedColors = []
+  const colorHex = colorsParam?.split('-')
+  const lockedColors:string[] = []
 
   if (!isPrimaryLocked) {
-    primaryColor.value = hexColors[0].slice(0, 7)
+    primaryColor.value = hexColors?.[0].slice(0, 7) as string
   } else {
-    lockedColors.push(colorHex[0].slice(0, 6))
+    lockedColors.push(colorHex?.[0].slice(0, 6) as string)
   }
 
   if (!isSecondaryLocked) {
-    secondaryColor.value = hexColors[1].slice(0, 7)
+    secondaryColor.value = hexColors?.[1].slice(0, 7) as string
   } else {
-    lockedColors.push(colorHex[1].slice(0, 6))
+    lockedColors.push(colorHex?.[1].slice(0, 6) as string)
   }
 
   if (!isPrimbuttnLocked) {
-    primbuttnColor.value = hexColors[2].slice(0, 7)
+    primbuttnColor.value = hexColors?.[2].slice(0, 7) as string
   } else {
-    lockedColors.push(colorHex[2].slice(0, 6))
+    lockedColors.push(colorHex?.[2].slice(0, 6) as string)
   }
 
   if (!isSecbuttnLocked) {
-    secbuttnColor.value = hexColors[3].slice(0, 7)
+    secbuttnColor.value = hexColors?.[3].slice(0, 7) as string
   } else {
-    lockedColors.push(colorHex[3].slice(0, 6))
+    lockedColors.push(colorHex?.[3].slice(0, 6) as string)
   }
 
   if (!isAccentLocked) {
-    accentColor.value = hexColors[4].slice(0, 7)
+    accentColor.value = hexColors?.[4].slice(0, 7) as string
   } else {
-    lockedColors.push(colorHex[4].slice(0, 6))
+    lockedColors.push(colorHex?.[4].slice(0, 6) as string)
   }
 
   const numLockedColors = lockedColors.length
 
-  colorSchemes.forEach(function (scheme) {
+  colorSchemes.forEach(function (scheme: Scheme) {
     const randomIndex = Math.floor(Math.random() * numLockedColors)
     const lockedColor = lockedColors[randomIndex]
     scheme.baseHue = '#' + lockedColor
@@ -1269,33 +1307,33 @@ function randomizeColors() {
 
   document.documentElement.style.setProperty(
     '--text',
-    isPrimaryLocked ? primaryColor.value : hexColors[0]
+    isPrimaryLocked ? primaryColor.value : hexColors?.[0] as string
   )
   document.documentElement.style.setProperty(
     '--bg',
-    isSecondaryLocked ? secondaryColor.value : hexColors[1]
+    isSecondaryLocked ? secondaryColor.value : hexColors?.[1] as string
   )
   document.documentElement.style.setProperty(
     '--primary',
-    isPrimbuttnLocked ? primbuttnColor.value : hexColors[2]
+    isPrimbuttnLocked ? primbuttnColor.value : hexColors?.[2] as string
   )
   document.documentElement.style.setProperty(
     '--secondary',
-    isSecbuttnLocked ? secbuttnColor.value : hexColors[3]
+    isSecbuttnLocked ? secbuttnColor.value : hexColors?.[3] as string
   )
   document.documentElement.style.setProperty(
     '--accent',
-    isAccentLocked ? accentColor.value : hexColors[4]
+    isAccentLocked ? accentColor.value : hexColors?.[4] as string
   )
 
-  lastSelectedColorSet = randomColorScheme.name
+  lastSelectedColorSet = randomColorScheme?.name
 
-  function setHexInputValues(hexInputs, colors) {
+  function setHexInputValues(hexInputs: NodeListOf<HTMLInputElement>, colors: string[]) {
     for (let i = 0; i < hexInputs.length; i++) {
       hexInputs[i].value = colors[i]
     }
   }
-  setHexInputValues(hexInputs, colors)
+  setHexInputValues(hexInputs, colors!)
   attachColorPickerListeners(colorPickers, hexInputs)
 
   getBrightnessAbs()
@@ -1310,8 +1348,8 @@ function randomizeColors() {
   updateContrastColor('--textcontrast', primColorClass)
   updateContrastColor('--bgcontrast', secColorClass)
 }
-
-function hslToHex(h, s, l) {
+// TODO- Add to colors
+function hslToHex(h: number, s:number, l: number): string {
   h /= 360
   s /= 100
   l /= 100
@@ -1320,7 +1358,7 @@ function hslToHex(h, s, l) {
   if (s === 0) {
     r = g = b = Math.round(l * 255)
   } else {
-    const hue2rgb = (p, q, t) => {
+    const hue2rgb = (p: number, q: number, t: number) => {
       if (t < 0) t += 1
       if (t > 1) t -= 1
       if (t < 1 / 6) return p + (q - p) * 6 * t
@@ -1344,7 +1382,7 @@ function hslToHex(h, s, l) {
 
 // SHADES
 
-function appendHexValue(element, color) {
+function appendHexValue(element: HTMLElement, color: string) {
   const span = document.createElement('span')
   span.innerText = color
   span.classList.add('hex-value')
@@ -1359,23 +1397,25 @@ function fillDivsWithShades() {
   const secbuttnColorValue = secbuttnColor.value
   const accentColorValue = accentColor.value
 
-  const textShadesDiv = document.querySelector('.text-shades')
-  const bgShadesDiv = document.querySelector('.bg-shades')
-  const primaryShadesDiv = document.querySelector('.primary-shades')
-  const secondaryShadesDiv = document.querySelector('.secondary-shades')
-  const accentShadesDiv = document.querySelector('.accent-shades')
+  const textShadesDiv = document.querySelector<HTMLElement>('.text-shades')!
+  const bgShadesDiv = document.querySelector<HTMLElement>('.bg-shades')!
+  const primaryShadesDiv =
+    document.querySelector<HTMLElement>('.primary-shades')!
+  const secondaryShadesDiv =
+    document.querySelector<HTMLElement>('.secondary-shades')!
+  const accentShadesDiv = document.querySelector<HTMLElement>('.accent-shades')!
 
   const numShades = 20
   const maxLightness = 95
 
-  function hexToHSL(hex) {
+  function hexToHSL(hex: string) {
     const r = parseInt(hex.substring(1, 3), 16) / 255
     const g = parseInt(hex.substring(3, 5), 16) / 255
     const b = parseInt(hex.substring(5, 7), 16) / 255
 
     const max = Math.max(r, g, b)
     const min = Math.min(r, g, b)
-    let h, s
+    let h!: number, s
 
     const l = (max + min) / 2
 
@@ -1406,8 +1446,8 @@ function fillDivsWithShades() {
       l: Math.round(l * 100),
     }
   }
-
-  function calculateShade(color, lightness) {
+  // TODO - Add to colors
+  function calculateShade(color: HSL, lightness: number) {
     return `hsl(${color.h}, ${color.s}%, ${lightness}%)`
   }
 
@@ -1514,24 +1554,24 @@ function fillDivsWithShades() {
     }
   }
 
-  const divs = document.querySelectorAll('.shade-cont > * > div')
+  const divs = document.querySelectorAll<HTMLElement>('.shade-cont > * > div')
   divs.forEach((div) => {
     div.addEventListener('mouseover', function () {
-      const hexValue = this.querySelector('.hex-value')
+      const hexValue = this.querySelector<HTMLElement>('.hex-value')
       if (hexValue) {
         hexValue.style.visibility = 'visible'
       }
     })
 
     div.addEventListener('mouseout', function () {
-      const hexValue = this.querySelector('.hex-value')
+      const hexValue = this.querySelector<HTMLElement>('.hex-value')
       if (hexValue) {
         hexValue.style.visibility = 'hidden'
       }
     })
 
     div.addEventListener('click', function () {
-      const hexValue = this.querySelector('.hex-value')
+      const hexValue = this.querySelector<HTMLElement>('.hex-value')
       if (hexValue) {
         const originalValue = hexValue.innerText
 
@@ -1650,7 +1690,7 @@ Thanks for using RealtimeColors.com!`
   const colorFile = new File([colorBlob], fileName + '-codes.txt', {
     type: 'text/plain',
   })
-
+  // DONE
   const zip = new JSZip()
   zip.file(paletteFile.name, paletteFile)
   zip.file(colorFile.name, colorFile)
@@ -1662,19 +1702,20 @@ Thanks for using RealtimeColors.com!`
 fileNameInput.addEventListener('input', () => {
   errorMessage.style.display = 'none'
 })
-
+// *DONE
 function isValidFileName(fileName) {
   const validFileNameRegex = /^[a-zA-Z0-9-_]+(\.[a-zA-Z0-9]+)?$/
   return validFileNameRegex.test(fileName)
 }
 
+// * Done
 function hexToRgb(hex) {
   const r = parseInt(hex.substring(1, 3), 16)
   const g = parseInt(hex.substring(3, 5), 16)
   const b = parseInt(hex.substring(5, 7), 16)
   return `${r}, ${g}, ${b}`
 }
-
+// * Done
 function dataURItoBlob(dataURI) {
   const byteString = atob(dataURI.split(',')[1])
   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
@@ -1698,7 +1739,7 @@ document.addEventListener('keydown', function (event) {
 //
 
 // CONTRAST CHECKER
-
+// *DONE
 function getBrightness(color) {
   let hex = color
 
@@ -1720,7 +1761,7 @@ function getBrightness(color) {
 
   return (l * 100) / 255
 }
-
+//* DONE
 function debounce(func, wait) {
   let timeout
   return function (...args) {
@@ -1732,9 +1773,11 @@ function debounce(func, wait) {
   }
 }
 
-const primaryBox = document.querySelectorAll('.primary-color-box')
-const secondaryBox = document.querySelectorAll('.secondary-color-box')
-const accentBox = document.querySelectorAll('.accent-color-box')
+const primaryBox = document.querySelectorAll<HTMLElement>('.primary-color-box')
+const secondaryBox = document.querySelectorAll<HTMLElement>(
+  '.secondary-color-box'
+)
+const accentBox = document.querySelectorAll<HTMLElement>('.accent-color-box')
 
 // CONTRAST CHECKING RULES
 
@@ -1942,7 +1985,7 @@ function updateAccentColor(
 }
 
 // CONTRAST CHECKING FUNCTION
-
+//*DONE
 function getContrastRatio(background, foreground) {
   const bg = parseColor(background)
   const fg = parseColor(foreground)
@@ -1956,7 +1999,7 @@ function getContrastRatio(background, foreground) {
     return (l2 + 0.05) / (l1 + 0.05)
   }
 }
-
+//* DONE
 function parseColor(color) {
   const regexRgb = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/
   const matchRgb = regexRgb.exec(color)
@@ -1984,7 +2027,7 @@ function parseColor(color) {
 
   throw new Error('Invalid color value: ' + color)
 }
-
+//* DONE
 function getLuminance(color) {
   const r = color.r / 255
   const g = color.g / 255
@@ -2213,15 +2256,19 @@ function updateUndoRedoButtons() {
 
 // // Expand button for toolbar
 
-const expandButtonColors = document.querySelector('.colors-rollout')
-const expandButtonFonts = document.querySelector('.fonts-rollout')
-const colorsOptions = document.querySelectorAll('.colors-option')
-const fontsOptions = document.querySelectorAll('.fonts-option')
-const colorSpan = document.querySelector('.color-tools-span')
-const fontSpan = document.querySelector('.font-tools-span')
+const expandButtonColors =
+  document.querySelector<HTMLElement>('.colors-rollout')
+const expandButtonFonts = document.querySelector<HTMLElement>('.fonts-rollout')
+const colorsOptions = document.querySelectorAll<HTMLElement>('.colors-option')
+const fontsOptions = document.querySelectorAll<HTMLElement>('.fonts-option')
+const colorSpan = document.querySelector<HTMLElement>('.color-tools-span')
+const fontSpan = document.querySelector<HTMLElement>('.font-tools-span')
 
-const colorsRolloutIcon = document.querySelector('.colors-rollout svg')
-const fontsRolloutIcon = document.querySelector('.fonts-rollout svg')
+const colorsRolloutIcon = document.querySelector<HTMLElement>(
+  '.colors-rollout svg'
+)
+const fontsRolloutIcon =
+  document.querySelector<HTMLElement>('.fonts-rollout svg')
 
 if (window.innerWidth < 1100) {
   expandButtonFonts.addEventListener('click', () => {
@@ -2253,8 +2300,10 @@ expandButtonFonts.addEventListener('click', () => {
 // expanding fonts
 
 const textFontsButton = document.getElementById('text-fonts-buttn')
-const textFontsBox = document.querySelector('.text-fonts-box')
-const textFontsIcon = document.querySelector('.text-fonts-buttn svg')
+const textFontsBox = document.querySelector<HTMLElement>('.text-fonts-box')
+const textFontsIcon = document.querySelector<HTMLElement>(
+  '.text-fonts-buttn svg'
+)
 
 textFontsButton.addEventListener('click', (event) => {
   if (!textFontsBox.contains(event.target)) {
@@ -2276,8 +2325,11 @@ document.addEventListener('mousedown', (event) => {
 })
 
 const headingFontsButton = document.getElementById('heading-fonts-buttn')
-const headingFontsBox = document.querySelector('.heading-fonts-box')
-const headingFontsIcon = document.querySelector('.heading-fonts-buttn svg')
+const headingFontsBox =
+  document.querySelector<HTMLElement>('.heading-fonts-box')
+const headingFontsIcon = document.querySelector<HTMLElement>(
+  '.heading-fonts-buttn svg'
+)
 
 headingFontsButton.addEventListener('click', (event) => {
   if (!headingFontsBox.contains(event.target)) {
@@ -2336,7 +2388,7 @@ function updateContrastColor(variable, element) {
   const bgColor = getComputedStyle(element).backgroundColor
   const contrastRatio2 = getContrastRatio2(textColor, bgColor)
 
-  const tooltipSpan = element.querySelector('.contrast-tooltip')
+  const tooltipSpan = element.querySelector<HTMLElement>('.contrast-tooltip')
 
   let contrastText
 
@@ -2361,7 +2413,7 @@ function updateContrastColor2(variable, element) {
   const bgColor = getComputedStyle(secbuttnColorClass).backgroundColor
   const contrastRatio2 = getContrastRatio2(accentColor, bgColor)
 
-  const tooltipSpan = element.querySelector('.contrast-tooltip')
+  const tooltipSpan = element.querySelector<HTMLElement>('.contrast-tooltip')
 
   let contrastText
 
@@ -2526,7 +2578,8 @@ hexInputs.forEach(function (hexInput) {
   })
 })
 
-const fontTypeInputs = document.querySelectorAll('.font-type-input')
+const fontTypeInputs =
+  document.querySelectorAll<HTMLElement>('.font-type-input')
 fontTypeInputs.forEach(function (fontTypeInput) {
   fontTypeInput.addEventListener('keydown', function (event) {
     if (event.keyCode === 32) {
@@ -2537,7 +2590,8 @@ fontTypeInputs.forEach(function (fontTypeInput) {
 
 function toggleSelectedType(button) {
   const codeTypeContainer = button.closest('.code-type-cont')
-  const codeTypes = codeTypeContainer.querySelectorAll('.code-type')
+  const codeTypes =
+    codeTypeContainer.querySelectorAll<HTMLElement>('.code-type')
   codeTypes.forEach((type) => {
     type.classList.remove('selected-type')
   })
@@ -2555,9 +2609,9 @@ function generateCSSCodeAndCopy() {
 
   let cssCode = ''
 
-  const hexButton = document.querySelector('.css-hex')
-  const rgbButton = document.querySelector('.css-rgb')
-  const hslButton = document.querySelector('.css-hsl')
+  const hexButton = document.querySelector<HTMLElement>('.css-hex')
+  const rgbButton = document.querySelector<HTMLElement>('.css-rgb')
+  const hslButton = document.querySelector<HTMLElement>('.css-hsl')
 
   hexButton.addEventListener('click', () => {
     cssCode = `--text: ${primaryColorValue};
@@ -2624,9 +2678,9 @@ function generateTailwindCSSCodeAndCopy() {
 
   let tcssCode = ''
 
-  const hexButton = document.querySelector('.tcss-hex')
-  const rgbButton = document.querySelector('.tcss-rgb')
-  const hslButton = document.querySelector('.tcss-hsl')
+  const hexButton = document.querySelector<HTMLElement>('.tcss-hex')
+  const rgbButton = document.querySelector<HTMLElement>('.tcss-rgb')
+  const hslButton = document.querySelector<HTMLElement>('.tcss-hsl')
 
   hexButton.addEventListener('click', () => {
     tcssCode = `'text': '${primaryColorValue}',
@@ -2693,9 +2747,9 @@ function generateSCSSCodeAndCopy() {
 
   let scssCode = ''
 
-  const hexButton = document.querySelector('.scss-hex')
-  const rgbButton = document.querySelector('.scss-rgb')
-  const hslButton = document.querySelector('.scss-hsl')
+  const hexButton = document.querySelector<HTMLElement>('.scss-hex')
+  const rgbButton = document.querySelector<HTMLElement>('.scss-rgb')
+  const hslButton = document.querySelector<HTMLElement>('.scss-hsl')
 
   hexButton.addEventListener('click', () => {
     scssCode = `$text: ${primaryColorValue};
@@ -2804,12 +2858,16 @@ function generateCSVCodeAndCopy() {
   })
 }
 
-const colorLabels = document.querySelectorAll('.color-label')
-const colorSettings = document.querySelectorAll('.color-settings')
+const colorLabels = document.querySelectorAll<HTMLElement>('.color-label')
+const colorSettings = document.querySelectorAll<HTMLElement>('.color-settings')
 
-const randomizeSettings = document.querySelector('.randomize-settings')
+const randomizeSettings = document.querySelector<HTMLElement>(
+  '.randomize-settings'
+)
 
-const randomizeOptionsButton = document.querySelector('.randomize-options-open')
+const randomizeOptionsButton = document.querySelector<HTMLElement>(
+  '.randomize-options-open'
+)
 
 const isOpenSettings = new Array(colorLabels.length).fill(false)
 
@@ -2893,10 +2951,11 @@ colorSettings.forEach((settings) => {
   })
 })
 
-const copyIcons = document.querySelectorAll('.copy-icon')
+const copyIcons = document.querySelectorAll<HTMLElement>('.copy-icon')
 
 copyIcons.forEach(function (copyIcon) {
-  const hexInput = copyIcon.parentElement.querySelector('.hex-input')
+  const hexInput =
+    copyIcon.parentElement.querySelector<HTMLElement>('.hex-input')
   const originalHTML = copyIcon.innerHTML
 
   copyIcon.addEventListener('click', function () {
@@ -3040,7 +3099,8 @@ function toggleTheme() {
     isDarkMode = !isDarkMode
     themeDiv.style.backgroundColor = isDarkMode ? 'black' : ''
 
-    const themeContainer = themeDiv.querySelector('.darkorlight-cont')
+    const themeContainer =
+      themeDiv.querySelector<HTMLElement>('.darkorlight-cont')
     const themeWrapper = themeContainer.children[0]
     themeWrapper.style.transform = isDarkMode
       ? 'translateY(0)'
