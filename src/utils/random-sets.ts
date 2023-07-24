@@ -1,10 +1,11 @@
 // Random color sets
 
-interface ColorSet {
+export interface ColorSet {
   colors: string[]
   source?: string
   set?: string
 }
+export const choice = <T>(seq: T[] ):T=> seq[Math.floor(Math.random() * seq.length)];
 
 export const colorSets: ColorSet[] = [
   {

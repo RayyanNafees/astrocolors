@@ -1,4 +1,4 @@
-import { colorSchemes } from "./schemes"
+import { colorSchemes } from './schemes'
 
 export const hexToRgb = (hex: string): string => {
   const r = parseInt(hex.substring(1, 3), 16)
@@ -7,7 +7,7 @@ export const hexToRgb = (hex: string): string => {
   return `${r}, ${g}, ${b}`
 }
 
-export interface RGBobject{
+export interface RGBobject {
   r: number
   g: number
   b: number
@@ -21,7 +21,7 @@ interface HSV {
 
 interface HSL {
   h: number
-  s:number
+  s: number
   l: number
 }
 /**
@@ -57,7 +57,6 @@ function parseColor(color: string): RGBobject {
   throw new Error('Invalid color value: ' + color)
 }
 
-
 /**
  * Returns the Luminance value of the supplied object of rgb value
  * @param {RGBobject} color rbv object for color values
@@ -80,7 +79,10 @@ function getLuminance(color: RGBobject): number {
  * @param {string} foreground the `rgb(0,0,0)` foreground color value
  * @returns {number} Contrast Ratio between `0` and `1`
  */
-export function getContrastRatio(background: string, foreground:string):number {
+export function getContrastRatio(
+  background: string,
+  foreground: string
+): number {
   const bg = parseColor(background)
   const fg = parseColor(foreground)
 
@@ -102,7 +104,6 @@ export function getContrastRatio(background: string, foreground:string):number {
 export const getBrightness = (color: string): number => {
   let hex = color
 
-  
   if (color.substring(0, 3) === 'rgb') {
     const [r, g, b] = color.match(/\d+/g)!
     hex = '#' + ((1 << 24) + (+r << 16) + (+g << 8) + +b).toString(16).slice(1)
@@ -122,7 +123,6 @@ export const getBrightness = (color: string): number => {
   return (l * 100) / 255
 }
 
-
 function hexToHSL(hexColor: string): HSL {
   let r, g, b: number
 
@@ -140,7 +140,7 @@ function hexToHSL(hexColor: string): HSL {
 
   const max = Math.max(r, g, b)
   const min = Math.min(r, g, b)
-  let h!:number, s, l: number
+  let h!: number, s, l: number
 
   l = (max + min) / 2
 
@@ -168,8 +168,7 @@ function hexToHSL(hexColor: string): HSL {
   return { h, s, l }
 }
 
-
-function calculateLightness(hexColor:string): number {
+function calculateLightness(hexColor: string): number {
   const hslColor = hexToHSL(hexColor)
 
   const lightness = hslColor.l
@@ -208,7 +207,13 @@ function hslToHex(h: number, s: number, l: number): string {
     .padStart(2, '0')}${b.toString(16).padStart(2, '0')}`
 }
 
-export function randomizeColors(selectedScheme='all') {
+const hexColors = (colors: string[]) =>
+  colors?.map((color: string) => {
+    const [h, s, l] = color.match(/\d+/g) as string[]
+    return hslToHex(parseInt(h), parseInt(s), parseInt(l))
+  })
+
+export function randomizeColors(selectedScheme = 'all') {
   let randomColorScheme
 
   if (selectedScheme === 'all') {
@@ -217,10 +222,10 @@ export function randomizeColors(selectedScheme='all') {
   } else {
     randomColorScheme = colorSchemes.find(
       (scheme) =>
-        scheme.name.toLowerCase().replace(/ /g, '-') === selectedScheme
+        scheme.name.toLowerCase().replace(/ /g, '-') === selectedScheme // Removes spaces
     )
   }
 
-  const colors = randomColorScheme?.generateColors()
-  return colors
+  const colors = randomColorScheme?.generateColors() as string[]
+  return hexColors(colors)
 }
