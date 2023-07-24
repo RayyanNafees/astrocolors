@@ -554,7 +554,7 @@ function generateQRCode2() {
 
   return QRcode.toDataURL(currentUrl, { width: 250 })
     .then((url) => {
-      alert(url.length)
+      //alert(url.length)
       var img = document.querySelector<HTMLImageElement>('div#qrcode>image')!
       img.src = url
     })
@@ -1270,7 +1270,7 @@ function randomizeColors() {
   }
 
   const colors = randomColorScheme?.generateColors()
-  alert(colors)
+  //alert(colors)
 
   const hexColors = colors?.map((color) => {
     const [h, s, l] = color.match(/\d+/g) as string[]
