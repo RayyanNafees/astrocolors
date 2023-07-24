@@ -29,7 +29,7 @@ Suffix `.css` to get the color values as css variables as in `_/api.css` or `_/c
 For example:
 
 ```css
-@import url(https://astrocolors.vercel.app/api.css);
+@import url('https://astrocolors.vercel.app/api.css');
 ```
 
 Will return the css with variables:
