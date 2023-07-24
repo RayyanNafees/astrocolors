@@ -24,7 +24,7 @@ _Returned variables:_
 
 #### `.css`
 
-Suffix `.css` to get the color values as css variables as in `_/api.css` or `_colorset.css`
+Suffix `.css` to get the color values as css variables as in `_/api.css` or `_/colorset.css`
 
 For example:
 
