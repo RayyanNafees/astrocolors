@@ -1270,6 +1270,7 @@ function randomizeColors() {
   }
 
   const colors = randomColorScheme?.generateColors()
+  alert(colors)
 
   const hexColors = colors?.map((color) => {
     const [h, s, l] = color.match(/\d+/g) as string[]
@@ -1351,6 +1352,7 @@ function randomizeColors() {
       hexInputs[i].value = colors[i]
     }
   }
+
   setHexInputValues(hexInputs, colors!)
   attachColorPickerListeners(colorPickers, hexInputs)
 

@@ -1282,6 +1282,7 @@ function randomizeColors() {
       hexInputs[i].value = colors[i]
     }
   }
+
   setHexInputValues(hexInputs, colors)
   attachColorPickerListeners(colorPickers, hexInputs)
 

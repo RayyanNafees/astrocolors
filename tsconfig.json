@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
-  // "exclude": ["node_modules", "src/public"],
+  "exclude": ["node_modules", "src/public"],
   // "compilerOptions": {
   //   "skipLibCheck": true,
   //   "moduleResolution": "node",
