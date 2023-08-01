@@ -10,8 +10,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^3.7.4",
-    "astro": "^2.8.5",
+    "@astrojs/vercel": "^3.7.5",
+    "astro": "^2.9.7",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "nanostores": "^0.9.3",
@@ -20,6 +20,6 @@
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
     "@types/qrcode": "^1.5.1",
-    "unocss": "^0.53.5"
+    "unocss": "^0.53.6"
   }
 }
