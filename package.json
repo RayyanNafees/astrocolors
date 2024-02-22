@@ -10,16 +10,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^3.7.5",
-    "astro": "^2.9.7",
+    "@astrojs/vercel": "^7.3.1",
+    "astro": "^4.4.2",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
-    "nanostores": "^0.9.3",
+    "nanostores": "^0.10.0",
     "qrcode": "^1.5.3"
   },
   "devDependencies": {
-    "@types/file-saver": "^2.0.5",
-    "@types/qrcode": "^1.5.1",
-    "unocss": "^0.53.6"
+    "@types/file-saver": "^2.0.7",
+    "@types/qrcode": "^1.5.5",
+    "unocss": "^0.58.5",
+    "vercel": "^33.5.1"
   }
 }
